@@ -1,6 +1,6 @@
 
 class Booking {
-  constructor(rawBooking) {
+  constructor(rawBooking) { //<-----takes individual booking object from fetch
     this.id = rawBooking.id;
     this.userID = rawBooking.userID;
     this.date = rawBooking.date;
