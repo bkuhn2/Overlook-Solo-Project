@@ -23,4 +23,46 @@ describe('Room Repo', function() {
     expect(roomRepo1.list).to.be.a('array');
     expect(roomRepo1.list).to.deep.equal(sampleRoomsForRepo)
   });
+
+  it('should filter its rooms by type', function() {
+    expect(roomRepo1.filterByType()).to.be.a('array');
+    expect(roomRepo1.filterByType('presidential suite')).to.deep.equal([]);
+    expect(roomRepo1.filterByType('residential suite')).to.deep.equal([
+      {
+        number: 1,
+        roomType: "residential suite",
+        bidet: true,
+        bedSize: "queen",
+        numBeds: 1,
+        costPerNight: 358.4
+      },
+      {
+        number: 23,
+        roomType: "residential suite",
+        bidet: false,
+        bedSize: "queen",
+        numBeds: 2,
+        costPerNight: 176.36
+      }
+    ]);
+    expect(roomRepo1.filterByType('single room')).to.deep.equal([
+      {
+        number: 3,
+        roomType: "single room",
+        bidet: false,
+        bedSize: "king",
+        numBeds: 1,
+        costPerNight: 491.14
+      },
+      {
+        number: 22,
+        roomType: "single room",
+        bidet: false,
+        bedSize: "full",
+        numBeds: 2,
+        costPerNight: 350.31
+      }
+    ]);
+  });
+
 });

@@ -24,12 +24,28 @@ const sampleRoomsForRepo = [
     costPerNight: 491.14
   },
   {
+    number: 22,
+    roomType: "single room",
+    bidet: false,
+    bedSize: "full",
+    numBeds: 2,
+    costPerNight: 350.31
+  },
+  {
     number: 18,
     roomType: "junior suite",
     bidet: false,
     bedSize: "king",
     numBeds: 2,
     costPerNight: 496.41
+  },
+  {
+    number: 23,
+    roomType: "residential suite",
+    bidet: false,
+    bedSize: "queen",
+    numBeds: 2,
+    costPerNight: 176.36
   }
 ]
 

@@ -3,6 +3,10 @@ class RoomRepo {
     this.list = rooms;
   }
 
+  filterByType(type) {
+    return this.list.filter(room => room.roomType === type)
+  }
+
 }
 
 export default RoomRepo;
