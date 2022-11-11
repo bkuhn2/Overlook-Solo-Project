@@ -1,5 +1,5 @@
 * {
-  border-style: solid;
+  /* border-style: solid; */
 }
 
 body {
@@ -11,17 +11,27 @@ main {
   width: 100%;
 }
 
-/*NAV BAR ------------------------------------------------------*/
-
+/* NAV BAR ------------------------------------------------------*/
 .nav-bar {
-  width: 275px;
+  width: 420px;
   height: 100vh;
-  background-color: #00000082
+  background-color: #00000069;
+  border-style: solid;
 }
 
+/* MY BOOKINGS PAGE ---------------------------------------------*/
+.my-booking-background {
+  background-image: linear-gradient(0deg, rgb(0 0 0 / 60%) 19%, rgb(39 39 39 / 62%) 83%), url(images/lobby-image.jpg);
+  background-size: cover;
+}
 
-/*HELPER CLASSES -----------------------------------------------*/
+/* BOOK A ROOM PAGE ---------------------------------------------*/
 
+
+
+/* HELPER CLASSES -----------------------------------------------*/
 .hide {
   display: none;
+  transition: 0s linear 0s, opacity 300ms;
+  /* look into smoother transitions*/
 }
