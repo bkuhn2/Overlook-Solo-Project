@@ -47,6 +47,33 @@ const sampleRoomsForRepo = [
     numBeds: 2,
     costPerNight: 176.36
   }
-]
+];
 
-export {sampleRoomsForRepo}
+const sampleBookingsForRoomRepo = [
+  {
+    id: "5fwrgu4i7k55hl7cw",
+    userID: 27,
+    date: "2023/11/17",
+    roomNumber: 22
+  },
+  {
+    id: "5fwrgu4i7k55hl7dk",
+    userID: 44,
+    date: "2023/11/18",
+    roomNumber: 22
+  },
+  {
+    id: "5fwrgu4i7k55hl8at",
+    userID: 4,
+    date: "2023/11/17",
+    roomNumber: 23
+  },
+  {
+    id: "5fwrgu4i7k55hl8ay",
+    userID: 8,
+    date: "2022/01/18",
+    roomNumber: 3
+  }
+];
+
+export {sampleRoomsForRepo, sampleBookingsForRoomRepo}

@@ -3,15 +3,16 @@ const expect = chai.expect;
 import BookingRepo from '../src/classes/BookingRepo';
 import Booking from '../src/classes/Booking';
 import RoomRepo from '../src/classes/RoomRepo';
-import {sampleRoomsForRepo} from '../test/room-repo-sample-data'
+import {sampleRoomsForRepo, sampleBookingsForRoomRepo} from '../test/room-repo-sample-data'
 
 describe('Room Repo', function() {
 
-  let roomRepo1;
+  let roomRepo1, bookingRepoTest;
 
   this.beforeEach('define variables for test', function() {
 
     roomRepo1 = new RoomRepo(sampleRoomsForRepo);
+    bookingRepoTest = new BookingRepo(sampleBookingsForRoomRepo)
 
   })
 
@@ -64,5 +65,16 @@ describe('Room Repo', function() {
       }
     ]);
   });
+
+  it('should filter its rooms by which are available', function() {
+
+    console.log(roomRepo1.filterByAvailable("2023", "02", "22", bookingRepoTest.sortBookingsByToday().futureBookings))
+    console.log(roomRepo1.filterByAvailable("2023", "11", "17", bookingRepoTest.sortBookingsByToday().futureBookings))
+
+
+    expect(roomRepo1.list).to.be.a('array');
+    expect(roomRepo1.list).to.deep.equal(sampleRoomsForRepo)
+  });
+
 
 });
