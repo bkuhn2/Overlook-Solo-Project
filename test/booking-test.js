@@ -16,7 +16,7 @@ describe('Booking', function() {
     bookingInstance3 = new Booking(bookingData3)
   })
 
-  it('should be a fuction', function() {
+  it('should be a function', function() {
     expect(Booking).to.be.a('function');
   });
 
