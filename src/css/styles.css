@@ -24,6 +24,29 @@ main {
   font-size: 2.2em;
   color: #b6b524;
   margin-left: 22px;
+  margin-top: 19px;
+}
+
+.nav-button-area {
+  display: flex;
+  flex-direction: column;
+  margin-top: 137px;
+  height: 380px;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.nav-button {
+  background: #00000099;
+  width: 276px;
+  height: 69px;
+  border-radius: 6px;
+  border-width: 2px;
+  border-style: double;
+  border-color: #8080808f;
+  border-image: none;
+  color: #eae9e3d9;
+  font-size: 1.3em;
 }
 
 /* HOME PAGE ----------------------------------------------------*/
@@ -52,4 +75,8 @@ main {
   display: none;
   transition: 0s linear 0s, opacity 300ms;
   /* look into smoother transitions*/
+}
+
+button {
+  cursor: pointer;
 }
