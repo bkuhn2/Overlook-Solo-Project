@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Overlook Hotel</title>
 </head>
-<body class="booking-background">
+<body class="home-background">
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   <nav class="nav-bar">
-    <h1 class="nav-title-text">Welcome back Faustino Quitzon</h1>
+    <h1 class="nav-title-text">Welcome back, Faustino Quitzon!</h1>
     <div class="nav-button-area">
       <button type="button" class="nav-button">View My Bookings</button>
       <button type="button" class="nav-button">Book a Room</button>
@@ -17,14 +17,12 @@
       <button type="button" class="nav-button">What is this site anyway?</button>
     </div>
   </nav>
-  <main class="home-page hide">
+  <main class="home-page">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
-    <div class="home-welcome-text-area">
-      <p class="home-welcome-text">Donec egestas molestie rutrum. Donec ex lorem, tempus at rutrum nec, mattis vitae nisl. Vivamus malesuada justo nulla, eget euismod libero laoreet at. Nullam urna orci, sollicitudin id ultricies at, volutpat at metus. Nullam vitae feugiat ex, eget posuere tellus. In nisi purus, elementum ut suscipit non, lobortis nec nulla. Integer eget ipsum in mauris pellentesque placerat vel in lorem. </p>
-      <p>👈</p>
-    </div>
+    <p class="home-welcome-text">Donec egestas molestie rutrum. Donec ex lorem, tempus at rutrum nec, mattis vitae nisl. Vivamus malesuada justo nulla, eget euismod libero laoreet at. Nullam urna orci, sollicitudin id ultricies at, volutpat at metus. Nullam vitae feugiat ex, eget posuere tellus. In nisi purus, elementum ut suscipit non, lobortis nec nulla. Integer eget ipsum in mauris pellentesque placerat vel in lorem. </p>
+    <p class="home-get-started-text"> 👈 Ready to book? Want to see your past visits? Get started in the dashboard on the left.</p>
   </main><!-- home page -->
-  <main class="my-bookings-page hide">
+  <main class="my-bookings- hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="my-bookings-heading-text">My Bookings</h2>
     <div class="my-bookings-button-area">
@@ -32,28 +30,41 @@
       <button type="button" class="my-bookings-button-grey">Upcoming Bookings</button>
     </div>
     <p class="past-booking-spend-text">You have spent $2,002 with us so far!</p>
-    <div class="my-bookings-display-area">
+    <section class="my-bookings-display-area">
      <!-- here go bookings --> 
-    </div>
+    </section>
   </main><!-- my bookings page -->
-  <main class="booking-page">
+  <main class="booking-page hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="booking-heading-text">Book Your Next Stay</h2>
     <form class="booking-input-form">
       <div class="booking-input-block">
         <input class="booking-input-field" type="text" id="bookingYear" required="number">
-        <label for="bookingYear" class="booking-label">Enter the year</label>
+        <label for="bookingYear" class="booking-label">Enter the year in numerical form</label>
       </div>
       <div class="booking-input-block">
         <input class="booking-input-field" type="text" id="bookingMonth" required="number">
-        <label for="bookingMonth" class="booking-label">Enter the month in numerical form (i.e., January would be 1)</label>
+        <label for="bookingMonth" class="booking-label">Enter the month in numerical form (i.e., January would be 01)</label>
       </div>
       <div class="booking-input-block">
         <input class="booking-input-field" type="text" id="bookingDay" required="number">
-        <label for="bookingDay" class="booking-label">Enter the Date</label>
+        <label for="bookingDay" class="booking-label">Enter the date in numerical form</label>
       </div>
       <button type="button" class="check-availability-button">Check Availability</button>
     </form>
+    <div class="available-filter-area">
+      <h4 class="filter-title-text">Filter your results by room type</h4>
+      <select name="typeFilter" id="typeFilter">
+        <option disabled selected value> select a type to filter</option>
+        <option value="type1">type1</option>
+        <option value="type2">type2</option>
+        <option value="type3">type3</option>
+      </select>
+      <button type="button" class="available-filter-button">Filter</button>
+    </div>
+    <section class="available-rooms-display-area">
+      <!-- here go available rooms or filtered rooms --> 
+    </section>
   </main><!-- book a room page -->
   <main class="hide"></main><!-- errorloading page ??? -->
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->

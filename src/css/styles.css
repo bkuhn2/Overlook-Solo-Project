@@ -30,7 +30,7 @@ main {
 
 .nav-title-text {
   font-size: 2.2em;
-  color: #b6b524;
+  color: #cd4545f3;
   margin-left: 22px;
   margin-top: 45px;
   text-shadow: 7px 6px 16px #000000;
@@ -60,29 +60,39 @@ main {
 
 /* HOME PAGE ----------------------------------------------------*/
 .home-background {
-  background-image: linear-gradient(0deg, rgb(0 0 0 / 60%) 19%, rgb(39 39 39 / 62%) 83%), url(/src/images/lobby-image.jpg);
+  background-image: linear-gradient(10deg, rgb(0 0 0 / 60%) 19%, rgb(39 39 39 / 68%) 83%), url(/src/images/lobby-image.jpg);
   background-size: cover;
   background-attachment: fixed;
 }
 
-.home-welcome-text-area {
+/* .home-welcome-text-area {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 133px;
-}
+} */
 
 .home-welcome-text {
-  text-align: center;
-  width: 900px;
+  text-align: right;
+  width: 1090px;
   font-size: 1.5em;
-  background-color: #141414ba;
   color: rgb(202 202 202);
-  padding: 33px;
-  border-radius: 7px;
-  border-style: solid;
-  border-color: black;
   font-style: oblique;
+  margin: auto;
+  margin-right: 60px;
+  margin-top: -18px;
+}
+
+.home-get-started-text {
+  text-align: right;
+  width: 1090px;
+  font-size: 1.8em;
+  /* background-color: #141414ba; */
+  color: rgb(202 202 202);
+  font-style: normal;
+  margin: auto;
+  margin-right: 60px;
+  margin-top: 50px;
 }
 
 /* MY BOOKINGS PAGE ---------------------------------------------*/
@@ -190,19 +200,19 @@ main {
   font-size: 2.5em;
   color: rgb(240, 240, 239);
   margin: auto;
-  margin-top: 50px;
+  margin-top: 80px;
   align-items: center;
   background-color: #7d787875;
-  width: 700px;
+  width: 500px;
   padding: 3px;
-  border-width: 9px;
-  border-style: double;
+  border-width: 4px;
+  border-style: solid;
   border-radius: 9px;
 }
 
 .booking-input-form {
-  height: 165px;
-  width: 1000px;
+  height: 130px;
+  width: 1075px;
   border-width: 4px;
   border-style: solid;
   margin: auto;
@@ -213,6 +223,7 @@ main {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: baseline;
+  padding-top: 40px;
 }
 
 .booking-input-block {
@@ -227,11 +238,81 @@ main {
   height: 40px;
   font-size: 1.5em;
   border-radius: 6px;
+  color: white;
+  background-color: #000000;
 }
 
 .booking-label { 
-  width: 250px;
+  width: 260px;
+  margin-top: 15px;
   text-align: center;
+  font-size: 1.2em;
+  color: rgba(240, 240, 239, 0.914);
+}
+
+.check-availability-button {
+  font-size: 1.2em;
+  height: 55px;
+  width: 220px;
+  border-radius: 15px;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 3px;
+  border-style: solid;
+  border-image: none;
+  background-color: #d6000034;
+  color: rgb(240, 240, 239);
+  font-size: 1.3em;
+}
+
+.available-filter-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.filter-title-text {
+  color: rgb(240, 240, 239);
+  font-size: 1.3em;
+  text-shadow: 0px 7px 5px #000000;
+  
+}
+
+#typeFilter {
+  width: 320px;
+  height: 42px;
+  font-size: 1.2em;
+  border-radius: 6px;
+
+}
+
+.available-filter-button {
+  margin-top: 20px;
+  font-size: 1.2em;
+  height: 45px;
+  width: 200px;
+  border-radius: 11px;
+  border-style: solid;
+  border-color: #f9f9f957;
+  border-width: 2px;
+  border-style: solid;
+  border-image: none;
+  background-color: #000000a3;
+  color: rgb(240, 240, 239);
+  font-size: 1.2em;
+
+}
+
+.available-rooms-display-area {
+  border-width: 5px;
+  width: 95%;
+  min-height: 200px;
+  margin: auto;
+  margin-top: 45px;
+  border: #000000;
+  border-style: solid;
+  border-width: 4px;
 }
 
 
