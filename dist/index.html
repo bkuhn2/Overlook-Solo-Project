@@ -6,19 +6,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Overlook Hotel</title>
 </head>
-<body class="home-background">
+<body class="my-bookings-background">
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   <nav class="nav-bar">
     <h1 class="nav-title-text">Welcome back Faustino Quitzon</h1>
     <div class="nav-button-area">
       <button type="button" class="nav-button">View My Bookings</button>
-      <button type="button" class="nav-button hide">Book a Room</button>
+      <button type="button" class="nav-button">Book a Room</button>
       <button type="button" class="nav-button hide">Back to Home</button>
       <button type="button" class="nav-button">What is this site anyway?</button>
     </div>
   </nav>
-  <main></main><!-- home page -->
-  <main class="hide"></main><!-- my bookings page -->
+  <main class="home-page hide">
+    <h1 class="main-heading-text">The Overlook Hotel</h1>
+    <div class="home-welcome-text-area">
+      <p class="home-welcome-text">Donec egestas molestie rutrum. Donec ex lorem, tempus at rutrum nec, mattis vitae nisl. Vivamus malesuada justo nulla, eget euismod libero laoreet at. Nullam urna orci, sollicitudin id ultricies at, volutpat at metus. Nullam vitae feugiat ex, eget posuere tellus. In nisi purus, elementum ut suscipit non, lobortis nec nulla. Integer eget ipsum in mauris pellentesque placerat vel in lorem. </p>
+      <p>👈</p>
+    </div>
+  </main><!-- home page -->
+  <main class="my-bookings-page">
+    <h1 class="main-heading-text">The Overlook Hotel</h1>
+    <h2 class="my-bookings-heading-text">My Bookings</h2>
+    <div class="my-bookings-button-area">
+      <button type="button" class="my-bookings-button">Past Bookings</button>
+      <button type="button" class="my-bookings-button-grey">Upcoming Bookings</button>
+    </div>
+    <p class="past-booking-spend-text">You have spent $2,002 with us so far!</p>
+    <div class="my-bookings-display-area">
+     <!-- here go bookings --> 
+    </div>
+  </main><!-- my bookings page -->
   <main class="hide"></main><!-- book a room page -->
   <main class="hide"></main><!-- errorloading page ??? -->
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
