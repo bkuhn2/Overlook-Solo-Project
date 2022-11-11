@@ -15,17 +15,35 @@ main {
 .nav-bar {
   width: 420px;
   height: 100vh;
-  background-color: #00000069;
+  background-color: #00000075;
   border-style: solid;
+  border-color: black;
 }
 
-/* MY BOOKINGS PAGE ---------------------------------------------*/
-.my-booking-background {
-  background-image: linear-gradient(0deg, rgb(0 0 0 / 60%) 19%, rgb(39 39 39 / 62%) 83%), url(images/lobby-image.jpg);
+.nav-title-text {
+  font-size: 2.2em;
+  color: #b6b524;
+  margin-left: 22px;
+}
+
+/* HOME PAGE ----------------------------------------------------*/
+.home-background {
+  background-image: linear-gradient(0deg, rgb(0 0 0 / 60%) 19%, rgb(39 39 39 / 62%) 83%), url(/src/images/lobby-image.jpg);
   background-size: cover;
 }
 
+/* MY BOOKINGS PAGE ---------------------------------------------*/
+.my-bookings-background {
+  background-image: linear-gradient(0deg, rgb(17 17 17 / 62%) 39%, rgb(21 21 21 / 55%) 83%), url(/src/images/bar-image.jpg);
+  background-size: cover;
+}
+
+
 /* BOOK A ROOM PAGE ---------------------------------------------*/
+.booking-background {
+  background-image: linear-gradient(0deg, rgb(0 0 0 / 67%) 39%, rgb(32 31 31 / 77%) 83%), url(/src/images/room-image.jpg);
+  background-size: cover;
+}
 
 
 
