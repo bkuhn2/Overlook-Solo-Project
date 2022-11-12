@@ -205,15 +205,15 @@ main {
   background-color: #7d787875;
   width: 500px;
   padding: 3px;
-  border-width: 4px;
+  border-width: 2px;
   border-style: solid;
   border-radius: 9px;
 }
 
 .booking-input-form {
-  height: 130px;
+  height: 100px;
   width: 1075px;
-  border-width: 4px;
+  border-width: 2px;
   border-style: solid;
   margin: auto;
   margin-top: 35px;
@@ -234,30 +234,30 @@ main {
 }
 
 .booking-input-field {
-  width: 100px;
-  height: 40px;
-  font-size: 1.5em;
+  width: 400px;
+  height: 50px;
+  font-size: 1.7em;
   border-radius: 6px;
   color: white;
-  background-color: #000000;
+  background-color: #bab8b858;
 }
 
-.booking-label { 
+/* .booking-label { 
   width: 260px;
   margin-top: 15px;
   text-align: center;
   font-size: 1.2em;
   color: rgba(240, 240, 239, 0.914);
-}
+} */
 
 .check-availability-button {
   font-size: 1.2em;
-  height: 55px;
+  height: 50px;
   width: 220px;
-  border-radius: 15px;
+  border-radius: 8px;
   border-style: solid;
   border-color: #000000;
-  border-width: 3px;
+  border-width: 2px;
   border-style: solid;
   border-image: none;
   background-color: #d6000034;

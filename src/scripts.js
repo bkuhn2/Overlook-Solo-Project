@@ -10,11 +10,18 @@ import './images/turing-logo.png'
 
 // VARIABLES ---------------------------------------------------------------->
 
-////////////////////
-//// Bookings //////
-////////////////////
+
+//// 📒 Bookings //////
+
 
 // QUERY SELECTORS ---------------------------------------------------------->
+
+
+//// 📒 Booking Page //////
+const dateInput = document.querySelector('.booking-input-field');
+
+
+// INITIAL FETCH ON PAGE LOAD ----------------------------------------------->
 
 
 
@@ -24,3 +31,8 @@ import './images/turing-logo.png'
 
 // FUNCTIONS ---------------------------------------------------------------->
 
+
+//// 🤓 Helper Functions //////
+
+//hide
+//make invisible

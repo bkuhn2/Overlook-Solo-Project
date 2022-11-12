@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Overlook Hotel</title>
 </head>
-<body class="home-background">
+<body class="booking-background">
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   <nav class="nav-bar">
     <h1 class="nav-title-text">Welcome back, Faustino Quitzon!</h1>
@@ -17,12 +17,12 @@
       <button type="button" class="nav-button">What is this site anyway?</button>
     </div>
   </nav>
-  <main class="home-page">
+  <main class="home-page hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <p class="home-welcome-text">Donec egestas molestie rutrum. Donec ex lorem, tempus at rutrum nec, mattis vitae nisl. Vivamus malesuada justo nulla, eget euismod libero laoreet at. Nullam urna orci, sollicitudin id ultricies at, volutpat at metus. Nullam vitae feugiat ex, eget posuere tellus. In nisi purus, elementum ut suscipit non, lobortis nec nulla. Integer eget ipsum in mauris pellentesque placerat vel in lorem. </p>
     <p class="home-get-started-text"> 👈 Ready to book? Want to see your past visits? Get started in the dashboard on the left.</p>
   </main><!-- home page -->
-  <main class="my-bookings- hide">
+  <main class="my-bookings hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="my-bookings-heading-text">My Bookings</h2>
     <div class="my-bookings-button-area">
@@ -34,23 +34,13 @@
      <!-- here go bookings --> 
     </section>
   </main><!-- my bookings page -->
-  <main class="booking-page hide">
+  <main class="booking-page">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="booking-heading-text">Book Your Next Stay</h2>
     <form class="booking-input-form">
-      <div class="booking-input-block">
-        <input class="booking-input-field" type="number" id="bookingYear" required="number" placeholder="YYYY">
-        <!-- make sure after searching (button event listener) that the placeholder/value goes back to this -->
-        <label for="bookingYear" class="booking-label">Enter the year in numerical form</label>
-      </div>
-      <div class="booking-input-block">
-        <input class="booking-input-field" type="number" id="bookingMonth" required="number" placeholder="MM">
-        <label for="bookingMonth" class="booking-label">Enter the month in numerical form (i.e., January would be 01)</label>
-      </div>
-      <div class="booking-input-block">
-        <input class="booking-input-field" type="number" id="bookingDay" required="number" placeholder="DD">
-        <label for="bookingDay" class="booking-label">Enter the date in numerical form</label>
-      </div>
+      <input class="booking-input-field" type="date" id="bookingInput">
+      <!-- SET MINIMUM -->
+      <!-- <label for="bookingMonth" class="booking-label">Enter the month in numerical form (i.e., January would be 01)</label> -->
       <button type="button" class="check-availability-button">Check Availability</button>
     </form>
     <div class="available-filter-area">
