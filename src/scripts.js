@@ -10,6 +10,12 @@ import './images/turing-logo.png'
 
 // VARIABLES ---------------------------------------------------------------->
 
+let currentCustomer;
+let allBookings;
+let allRooms;
+let currentPage; //??
+let requestedDate;
+let selectedRoom;
 
 
 
@@ -29,6 +35,10 @@ const navButtonAbout = document.querySelector('#navAbout');
 const homePage = document.querySelector('.home-page');
 
 //// 🤡 My Bookings Page //////
+const myBookingsPage = document.querySelector('.my-bookings');
+const myBookingSpendText = document.querySelector('.past-booking-spend-text');
+const myUpcomingBookingDisplay = document.querySelector('.my-upcoming-bookings-display-area');
+const myPastBookingDisplay = document.querySelector('.my-past-bookings-display-area');
 
 
 //// 📖 Booking Page //////
