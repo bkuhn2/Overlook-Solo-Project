@@ -55,5 +55,8 @@ describe('Customer', function() {
     expect(customer3.findTotalMoneySpent(sampleRoomsForCustomers)).to.equal(0);
   });
 
+  it('should make a piece of data that could be used to post a new booking', function() {
+    expect(customer1.makeBookingData(20, "2023/12/31")).to.deep.equal({"userID": 5, "date": "2023/12/31", "roomNumber": 20});
+  });
 
 });
