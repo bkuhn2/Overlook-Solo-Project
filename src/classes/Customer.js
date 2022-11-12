@@ -7,6 +7,12 @@ class Customer {
     this.bookings = new BookingRepo(allBookings.filter(booking => booking.userID === customerInfo.id))
   }
 
+  findTotalMoneySpent(allRooms) {
+    return this.bookings.sortBookingsByToday().pastBookings.reduce((total, booking) => {
+      total += booking.findCost(allRooms);
+      return total;
+    }, 0)
+  }
 
 }
 
