@@ -13,10 +13,10 @@ class BookingRepo {
     const badFormatting = []
     const todaysDate = new Date();
     const thisYear = todaysDate.getFullYear();
-    const thisMonth = todaysDate.getMonth();
+    const thisMonth = todaysDate.getMonth() + 1;
     const thisDay = todaysDate.getDate();
 
-    this.list.forEach((booking, index) => {
+    this.list.forEach((booking) => {
       const dateNums = booking.date.split('/').map(num => +num);
       const dateNumJoined = booking.date.split('/').join('')
 

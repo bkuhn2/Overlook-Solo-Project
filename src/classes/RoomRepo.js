@@ -8,28 +8,38 @@ class RoomRepo {
   }
 
   filterByAvailable(year, month, day, futureBookings) { //<------taking these from the user input area, make sure they are strings
-    // if (typeof year === 'string' && typeof month === 'string' && typeof day === 'string') {
-    // }
-    // not sure about this if statement - revisit?
+    if (typeof year === 'string' && typeof month === 'string' && typeof day === 'string') {
 
-    const dateRequest = [year, month, day].join('/');
-    console.log(dateRequest);
+      const dateRequest = [year, month, day].join('/');
+      const dateRequestNums = [+year, +month, +day];
+      let dateRequestIsFuture = '';
 
-    return this.list.filter(room => {
-      return !futureBookings.find(booking => {
-        return booking.roomNumber === room.number && booking.date === dateRequest
-      })
-    })
+      const todaysDate = new Date();
+      const thisYear = todaysDate.getFullYear();
+      const thisMonth = todaysDate.getMonth() + 1;
+      const thisDay = todaysDate.getDate();
 
+      if (dateRequestNums[0] < thisYear) {
+        dateRequestIsFuture = false;
+      } else if (dateRequestNums[0] > thisYear) {
+        dateRequestIsFuture = true;
+      } else if (dateRequestNums[1] < thisMonth) {
+        dateRequestIsFuture = false;
+      } else if (dateRequestNums[1] > thisMonth) {
+        dateRequestIsFuture = true;
+      } else if (dateRequestNums[2] < thisDay) {
+        dateRequestIsFuture = false;
+      } else {
+        dateRequestIsFuture = true;
+      }
+  
+      return this.list.filter(room => {
+        return !futureBookings.find(booking => booking.roomNumber === room.number && booking.date === dateRequest)
+          && dateRequestIsFuture
+      });
 
-    // const availableRooms = []
+    }
 
-    // this.list.forEach(room => {
-    //   if (futureBookings.find(booking.roomNumber === room.number) === undefined && 
-    //       futureBookings.find(booking.date === dateRequest) === undefined) {
-        
-    //   }
-    // });
   }
 
 }
