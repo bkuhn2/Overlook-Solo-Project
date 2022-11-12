@@ -39,20 +39,29 @@
     <h2 class="booking-heading-text">Book Your Next Stay</h2>
     <form class="booking-input-form">
       <input class="booking-input-field" type="date" id="bookingInput">
-      <!-- SET MINIMUM -->
-      <!-- <label for="bookingMonth" class="booking-label">Enter the month in numerical form (i.e., January would be 01)</label> -->
       <button type="button" class="check-availability-button">Check Availability</button>
     </form>
-    <div class="available-filter-area">
-      <h4 class="filter-title-text">Filter your results by room type</h4>
-      <select name="typeFilter" id="typeFilter">
-        <option disabled selected value> select a type to filter</option>
-        <option value="type1">type1</option>
-        <option value="type2">type2</option>
-        <option value="type3">type3</option>
-      </select>
-      <button type="button" class="available-filter-button">Filter</button>
-    </div>
+    <section class="booking-search-control-panel">
+      <div class="booking-confirm-area invisible">
+        <h3 class="booking-confirm-title-text">Confirm Booking</h3>
+        <p class="booking-confirm-text">Book this ${ROOM DATA HERE} on ${DATE}?</p>
+        <button type="button" class="book-button">BOOK</button>
+      </div>
+      <div class="booking-error-notification-area">
+        <p class="booking-error-text hide" id="inValidDateText">Please enter a valid date.</p>
+        <p class="booking-error-text" id="noAvailableRoomsText">Sorry, no rooms available on the requested date.</p>
+      </div>
+      <div class="available-filter-area invisible">
+        <h4 class="filter-title-text">Filter your results by room type</h4>
+        <select name="typeFilter" id="typeFilter">
+          <option disabled selected value> select a type to filter</option>
+          <option value="type1">type1</option>
+          <option value="type2">type2</option>
+          <option value="type3">type3</option>
+        </select>
+        <button type="button" class="available-filter-button">Filter</button>
+      </div>
+    </section>
     <section class="available-rooms-display-area">
       <!-- here go available rooms or filtered rooms --> 
     </section>

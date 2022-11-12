@@ -265,18 +265,81 @@ main {
   font-size: 1.3em;
 }
 
+.booking-search-control-panel {
+  width: 1600px;
+  margin: auto;
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.booking-confirm-area {
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booking-confirm-title-text {
+  color: rgb(240, 240, 239);
+  font-size: 2.1em;
+  text-shadow: 0px 7px 5px #000000;
+}
+
+.booking-confirm-text {
+  color: rgb(240, 240, 239);
+  font-size: 1.6em;
+  text-shadow: 0px 7px 5px #000000;
+  text-align: center;
+  margin-top: -5px;
+}
+
+.book-button {
+  font-size: 1.2em;
+  height: 45px;
+  width: 200px;
+  border-radius: 11px;
+  border-style: solid;
+  border-color: #f9f9f957;
+  border-width: 2px;
+  border-style: solid;
+  border-image: none;
+  background-color: #bd0000c0;
+  color: rgb(240, 240, 239);
+  font-size: 1.2em;
+
+}
+
+.booking-error-notification-area {
+  width: 650px;
+  height: 200px;
+  margin-right: 30px;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.booking-error-text {
+  color: rgb(255, 225, 74);
+  font-size: 1.9em;
+  text-shadow: 0px 7px 5px #000000;
+
+}
+
 .available-filter-area {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
+  width: 375px;
 }
 
 .filter-title-text {
   color: rgb(240, 240, 239);
-  font-size: 1.3em;
+  font-size: 1.7em;
   text-shadow: 0px 7px 5px #000000;
-  
 }
 
 #typeFilter {
@@ -309,9 +372,9 @@ main {
   width: 95%;
   min-height: 200px;
   margin: auto;
-  margin-top: 45px;
+  margin-top: 30px;
   border: #000000;
-  border-style: solid;
+  /* border-style: solid; */
   border-width: 4px;
 }
 
