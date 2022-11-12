@@ -4,6 +4,7 @@ class BookingRepo {
   constructor(bookings) { //<------takes array raw data, or filtered raw data from fetch
     this.list = bookings.map(booking => new Booking(booking));
   }
+  //returns an array
 
   sortBookingsByToday() {
     const sortedBookings = {
@@ -13,10 +14,10 @@ class BookingRepo {
     const badFormatting = []
     const todaysDate = new Date();
     const thisYear = todaysDate.getFullYear();
-    const thisMonth = todaysDate.getMonth();
+    const thisMonth = todaysDate.getMonth() + 1;
     const thisDay = todaysDate.getDate();
 
-    this.list.forEach((booking, index) => {
+    this.list.forEach((booking) => {
       const dateNums = booking.date.split('/').map(num => +num);
       const dateNumJoined = booking.date.split('/').join('')
 
@@ -44,6 +45,7 @@ class BookingRepo {
     }
 
   }
+  // returns an array
 }
 
 export default BookingRepo;

@@ -39,15 +39,16 @@
     <h2 class="booking-heading-text">Book Your Next Stay</h2>
     <form class="booking-input-form">
       <div class="booking-input-block">
-        <input class="booking-input-field" type="text" id="bookingYear" required="number">
+        <input class="booking-input-field" type="number" id="bookingYear" required="number" placeholder="YYYY">
+        <!-- make sure after searching (button event listener) that the placeholder/value goes back to this -->
         <label for="bookingYear" class="booking-label">Enter the year in numerical form</label>
       </div>
       <div class="booking-input-block">
-        <input class="booking-input-field" type="text" id="bookingMonth" required="number">
+        <input class="booking-input-field" type="number" id="bookingMonth" required="number" placeholder="MM">
         <label for="bookingMonth" class="booking-label">Enter the month in numerical form (i.e., January would be 01)</label>
       </div>
       <div class="booking-input-block">
-        <input class="booking-input-field" type="text" id="bookingDay" required="number">
+        <input class="booking-input-field" type="number" id="bookingDay" required="number" placeholder="DD">
         <label for="bookingDay" class="booking-label">Enter the date in numerical form</label>
       </div>
       <button type="button" class="check-availability-button">Check Availability</button>

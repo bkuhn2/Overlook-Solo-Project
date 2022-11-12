@@ -58,4 +58,15 @@ describe('Booking', function() {
   it('should let the customer know if they can\'t find the room to get the cost', function() {
     expect(bookingInstance3.findCost(sampleRooms)).to.equal('Could not find the room in our system, please check again to make sure number is correct');
   });
+
+  it('should let the customer know if they can\'t find the room to get the cost', function() {
+    expect(bookingInstance3.findCost(sampleRooms)).to.equal('Could not find the room in our system, please check again to make sure number is correct');
+  });
+
+  it('should find the room associated with this particular booking', function() {
+    expect(bookingInstance1.findRoom(sampleRooms)).to.equal(sampleRooms[2]);
+    expect(bookingInstance2.findRoom(sampleRooms)).to.equal(sampleRooms[0]);
+  });
+
+
 });
