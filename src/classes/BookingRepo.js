@@ -4,6 +4,7 @@ class BookingRepo {
   constructor(bookings) { //<------takes array raw data, or filtered raw data from fetch
     this.list = bookings.map(booking => new Booking(booking));
   }
+  //returns an array
 
   sortBookingsByToday() {
     const sortedBookings = {
@@ -44,6 +45,7 @@ class BookingRepo {
     }
 
   }
+  // returns an array
 }
 
 export default BookingRepo;

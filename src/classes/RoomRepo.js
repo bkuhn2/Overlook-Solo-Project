@@ -3,9 +3,10 @@ class RoomRepo {
     this.list = rooms;
   }
 
-  filterByType(type) {
+  filterByType(type) { //takes in type selection in filter dropdown HTML
     return this.list.filter(room => room.roomType === type)
   }
+  //returns an array
 
   filterByAvailable(year, month, day, futureBookings) { //<------taking these from the user input area, make sure they are strings
     if (typeof year === 'string' && typeof month === 'string' && typeof day === 'string') {
@@ -37,11 +38,9 @@ class RoomRepo {
         return !futureBookings.find(booking => booking.roomNumber === room.number && booking.date === dateRequest)
           && dateRequestIsFuture
       });
-
     }
-
   }
-
+  //returns an array
 }
 
 export default RoomRepo;
