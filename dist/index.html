@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Overlook Hotel</title>
 </head>
-<body class="booking-background">
+<body id="body" class="booking-background">
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   <nav class="nav-bar">
     <h1 class="nav-title-text">Welcome back, Faustino Quitzon!</h1>
     <div class="nav-button-area">
-      <button type="button" class="nav-button">View My Bookings</button>
-      <button type="button" class="nav-button">Book a Room</button>
-      <button type="button" class="nav-button hide">Back to Home</button>
-      <button type="button" class="nav-button">What is this site anyway?</button>
+      <button type="button" class="nav-button" id="navViewBookings">View My Bookings</button>
+      <button type="button" class="nav-button" id="navBookRoom">Book a Room</button>
+      <button type="button" class="nav-button hide" id="navBackHome">Back to Home</button>
+      <button type="button" class="nav-button" id="navAbout">What is this site anyway?</button>
     </div>
   </nav>
   <main class="home-page hide">
@@ -22,7 +22,7 @@
     <p class="home-welcome-text">Donec egestas molestie rutrum. Donec ex lorem, tempus at rutrum nec, mattis vitae nisl. Vivamus malesuada justo nulla, eget euismod libero laoreet at. Nullam urna orci, sollicitudin id ultricies at, volutpat at metus. Nullam vitae feugiat ex, eget posuere tellus. In nisi purus, elementum ut suscipit non, lobortis nec nulla. Integer eget ipsum in mauris pellentesque placerat vel in lorem. </p>
     <p class="home-get-started-text"> 👈 Ready to book? Want to see your past visits? Get started in the dashboard on the left.</p>
   </main><!-- home page -->
-  <main class="my-bookings hide">
+  <main class="my-bookings">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="my-bookings-heading-text">My Bookings</h2>
     <div class="my-bookings-button-area">
@@ -34,7 +34,7 @@
      <!-- here go bookings --> 
     </section>
   </main><!-- my bookings page -->
-  <main class="booking-page">
+  <main class="booking-page hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="booking-heading-text">Book Your Next Stay</h2>
     <form class="booking-input-form">
@@ -48,8 +48,8 @@
         <button type="button" class="book-button">BOOK</button>
       </div>
       <div class="booking-error-notification-area">
-        <p class="booking-error-text hide" id="inValidDateText">Please enter a valid date.</p>
-        <p class="booking-error-text" id="noAvailableRoomsText">Sorry, no rooms available on the requested date.</p>
+        <p class="booking-error-text hide" id="invalidDateText">Please enter a valid date.</p>
+        <p class="booking-error-text hide" id="noAvailableRoomsText">Sorry, no rooms available on the requested date.</p>
       </div>
       <div class="available-filter-area invisible">
         <h4 class="filter-title-text">Filter your results by room type</h4>

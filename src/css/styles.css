@@ -368,6 +368,9 @@ main {
 }
 
 .available-rooms-display-area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   border-width: 5px;
   width: 95%;
   min-height: 200px;

@@ -11,14 +11,38 @@ import './images/turing-logo.png'
 // VARIABLES ---------------------------------------------------------------->
 
 
-//// 📒 Bookings //////
 
 
 // QUERY SELECTORS ---------------------------------------------------------->
 
+//// 🌎 Body //////
+const pageBody = document.querySelector('#body');
 
-//// 📒 Booking Page //////
+//// 🗺 Nav Bar //////
+const navBarHeading = document.querySelector('.nav-title-text');
+const navButtonViewBookings = document.querySelector('#navViewBookings');
+const navButtonBookRoom = document.querySelector('#navBookRoom');
+const navButtonBackHome = document.querySelector('#navBackHome');
+const navButtonAbout = document.querySelector('#navAbout');
+
+//// 🏡 Home Page //////
+const homePage = document.querySelector('.home-page');
+
+//// 🤡 My Bookings Page //////
+
+
+//// 📖 Booking Page //////
+const bookingPage = document.querySelector('.booking-page');
 const dateInput = document.querySelector('.booking-input-field');
+const checkAvailabilityButton = document.querySelector('.check-availability-button');
+const bookingConfirmArea = document.querySelector('.booking-confirm-area');
+const bookingConfirmText = document.querySelector('.booking-confirm-text');
+const bookingErrorTextInvalidDate = document.querySelector('#invalidDateText');
+const bookingErrorTextNoAvailable = document.querySelector('#noAvailableRoomsText');
+const filterArea = document.querySelector('.available-filter-area');
+const filterDropDown = document.querySelector('#typeFilter');
+const filterButton = document.querySelector('.available-filter-button');
+const availableRoomsDisplayArea = document.querySelector('.available-rooms-display-area');
 
 
 // INITIAL FETCH ON PAGE LOAD ----------------------------------------------->
