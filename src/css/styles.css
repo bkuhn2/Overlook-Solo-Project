@@ -42,17 +42,17 @@ main {
   margin-top: 137px;
   height: 380px;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .nav-button {
-  background: #00000099;
+  background: #000000a5;
   width: 276px;
   height: 69px;
   border-radius: 6px;
-  border-width: 7px;
+  border-width: 5px;
   border-style: double;
-  border-color: #8080808f;
+  border-color: #b3acacac;
   border-image: none;
   color: #eae9e3d9;
   font-size: 1.3em;

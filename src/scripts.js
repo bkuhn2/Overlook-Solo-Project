@@ -54,6 +54,9 @@ const filterDropDown = document.querySelector('#typeFilter');
 const filterButton = document.querySelector('.available-filter-button');
 const availableRoomsDisplayArea = document.querySelector('.available-rooms-display-area');
 
+//// ⁉ About Page //////
+// const aboutPage = 'tbd';
+
 
 // INITIAL FETCH ON PAGE LOAD ----------------------------------------------->
 
@@ -61,12 +64,89 @@ const availableRoomsDisplayArea = document.querySelector('.available-rooms-displ
 
 // EVENT LISTENERS ---------------------------------------------------------->
 
+//// 🗺 Nav Bar //////
+navButtonViewBookings.addEventListener('click', loadMyDashboard);
+navButtonBookRoom.addEventListener('click', loadBookingPage);
+navButtonBackHome.addEventListener('click', loadHomePage);
+// remember the about page
+
+
+
 
 
 // FUNCTIONS ---------------------------------------------------------------->
 
+//// 🗺 Nav Bar //////
+function loadMyDashboard() {
+  hide(homePage);
+  hide(bookingPage);
+  // hide(aboutPage);
+  unHide(myBookingsPage);
 
-//// 🤓 Helper Functions //////
+  makeVisible(navButtonBackHome);
+  makeVisible(navButtonBookRoom);
+  makeVisible(navButtonAbout);
+  makeInvisible(navButtonViewBookings);
 
-//hide
-//make invisible
+  pageBody.classList.add('my-bookings-background');
+  pageBody.classList.remove('home-background');
+  pageBody.classList.remove('booking-background');
+  //remove about backround
+}
+
+function loadBookingPage() {
+  hide(homePage);
+  hide(myBookingsPage);
+  // hide(aboutPage);
+  unHide(bookingPage)
+
+  makeVisible(navButtonViewBookings);
+  makeVisible(navButtonBackHome);
+  makeVisible(navButtonAbout);
+  makeInvisible(navButtonBookRoom);
+
+  pageBody.classList.remove('my-bookings-background');
+  pageBody.classList.remove('home-background');
+  pageBody.classList.add('booking-background');
+  //remove about backround
+}
+
+function loadHomePage() {
+  hide(bookingPage);
+  hide(myBookingsPage);
+  // hide(aboutPage);
+  unHide(homePage)
+
+  makeVisible(navButtonViewBookings);
+  makeVisible(navButtonBookRoom);
+  makeVisible(navButtonAbout);
+  makeInvisible(navButtonBackHome);
+
+  pageBody.classList.remove('my-bookings-background');
+  pageBody.classList.add('home-background');
+  pageBody.classList.remove('booking-background');
+  //remove about backround
+}
+
+function loadAboutPage() {
+//tbd
+}
+
+
+//// 🤓 Helper //////
+function hide(element) {
+  element.classList.add('hide');
+}
+
+function unHide(element) {
+  element.classList.remove('hide');
+}
+
+function makeInvisible(element) {
+  element.classList.add('invisible');
+}
+
+function makeVisible(element) {
+  element.classList.remove('invisible');
+
+}
