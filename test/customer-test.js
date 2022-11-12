@@ -11,18 +11,47 @@ describe('Customer', function() {
   let customer1, customer2, customer3;
 
   this.beforeEach('define variables for test', function() {
-    customer1 = new Customer();
-    customer2 = new Customer();
-    customer3 = new Customer();
+    customer1 = new Customer(sampleCustomers[0], sampleBookingsForCustomers);
+    customer2 = new Customer(sampleCustomers[1], sampleBookingsForCustomers);
+    customer3 = new Customer(sampleCustomers[2], sampleBookingsForCustomers);
   })
 
   it('should be a function', function() {
     expect(Customer).to.be.a('function');
   });
 
-  it('should store an array of rooms', function() {
-    // expect(roomRepo1.list).to.be.a('array');
-    // expect(roomRepo1.list).to.deep.equal(sampleRoomsForRepo)
+  it('should have an ID', function() {
+    expect(customer1.id).to.equal(5);
+    expect(customer2.id).to.equal(6);
+    expect(customer3.id).to.equal(9);
   });
+
+  it('should have a repository of all their bookings', function() {
+    expect(customer1.bookings.list).to.deep.equal([
+      {id: "5fwrgu4i7k55hl87a", userID: 5, date: "2022/02/25", roomNumber: 3},
+      {id: "5fwrgu4i7k55hl87c", userID: 5, date: "2023/01/30", roomNumber: 10},
+      {id: "5fwrgu4i7k55hl87d", userID: 5, date: "2022/01/23", roomNumber: 25}]);
+    expect(customer2.bookings.list).to.deep.equal([{id: "5fwrgu4i7k55hl87i", userID: 6, date: "2022/01/26", roomNumber: 9}]);
+    expect(customer3.bookings.list).to.deep.equal([
+      {id: "5fwrgu4i7k55hl87j", userID: 9, date: "2022/02/12", roomNumber: 2},
+      {id: "5fwrgu4i7k55hl87m", userID: 9, date: "2023/02/08", roomNumber: 8}]);
+  });
+
+  it('its booking repo should be an instance of BookingRepo', function() {
+    expect(customer1.bookings).to.be.an.instanceOf(BookingRepo);
+    expect(customer2.bookings).to.be.an.instanceOf(BookingRepo);
+    expect(customer3.bookings).to.be.an.instanceOf(BookingRepo);
+  });
+
+  it('the bookings in its repo should be instances of Booking', function() {
+    expect(customer1.bookings.list[2]).to.be.an.instanceOf(Booking);
+    expect(customer2.bookings.list[0]).to.be.an.instanceOf(Booking);
+    expect(customer3.bookings.list[1]).to.be.an.instanceOf(Booking);
+  });
+
+
+
+
+  //bookings need be a Booking rep instance
 
 });
