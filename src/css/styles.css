@@ -97,92 +97,94 @@ main {
 
 /* MY BOOKINGS PAGE ---------------------------------------------*/
 .my-bookings-background {
-  background-image: linear-gradient(0deg, rgb(17 17 17 / 62%) 39%, rgb(21 21 21 / 77%) 83%), url(/src/images/bar-image.jpg);
+  background-image: linear-gradient(0deg, rgb(17 17 17 / 76%) 39%, rgb(21 21 21 / 84%) 83%), url(/src/images/bar-image.jpg);
   background-size: cover;
   background-attachment: fixed;
 }
 
 .my-bookings-heading-text {
   text-align: center;
-  border-style: solid;
-  border-color: #000000;
-  font-size: 2.5em;
-  color: rgb(240, 240, 239);
+  /* border-style: solid;
+  border-color: #f1f1f1a9; */
+  font-size: 3.5em;
+  color: #f8c12ab6;
   margin: auto;
-  margin-top: 150px;
+  margin-top: 100px;
+  margin-bottom: 30px;
   align-items: center;
-  background-color: #a583279c;
-  width: 700px;
-  height: 75px;
-  padding-top: 23px;
+  text-shadow: 7px 11px 11px #000000;
+  /* background-color: #a583279c; */
+  /* width: 700px;
+  height: 55px; */
+  /* padding-top: 6px;
   padding-bottom: -2px;
-  border-width: 9px;
-  border-style: double;
+  border-width: 2px;
+  border-radius: 8px; */
 }
 
-.my-bookings-button-area {
-  display: flex;
-  flex-direction: row;
-  margin: auto;
-  justify-content: space-around;
-  width: 700px;
-  margin-top: 35px;
-}
-
-.my-bookings-button {
-  height: 60px;
-  width: 240px;
-  border-radius: 15px;
-  border-style: solid;
-  border-color: #000000;
-  border-width: 9px;
-  border-style: double;
-  border-image: none;
-  background-color: #008586bd;
-  color: rgb(240, 240, 239);
-  font-size: 1.3em;
-}
-
-.my-bookings-button-grey {
-  height: 60px;
-  width: 240px;
-  border-radius: 15px;
-  border-style: solid;
-  border-color: #000000;
-  border-width: 9px;
-  border-style: double;
-  border-image: none;
-  background-color: rgb(85, 84, 84);
-  color: rgb(240, 240, 239);
-  font-size: 1.3em;
-}
 
 .past-booking-spend-text {
-  color: rgb(240, 240, 239);
+  color: #7cecece7;
   text-align: center;
   border-style: solid;
-  border-color: #000000;
+  border-color: #dfdddd72;
   font-size: 1.5em;
   margin: auto;
-  margin-top: 65px;
+  margin-top: 12px;
   align-items: center;
   width: 820px;
-  border-width: 3px;
+  border-width: 2px;
   border-style: solid;
-  border-radius: 45px;
+  border-radius: 4px;
   background-color: #00000091;
-  padding: 5px;
+  padding: 7px;
+  text-shadow: 7px 11px 11px #000000;
 }
 
-.my-bookings-display-area {
+.bookingsExplaination {
+  text-shadow: 7px 11px 11px #000000;
+  color: rgb(240, 240, 239);
+  font-size: 1.3em;
+  margin: auto;
+  text-align: center;
+  width: 720px;
+  margin-top: 12px;
+  margin-bottom: 50px;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 4px;
+  border-style: solid;
+  border-color: #dfdddd72;
+  background-color: #00000091;
+  padding: 7px;
+  text-shadow: 7px 11px 11px #000000;
+}
+
+.my-upcoming-bookings-display-area,
+.my-past-bookings-display-area {
   border-width: 5px;
-  width: 95%;
+  width: 93%;
   min-height: 200px;
   margin: auto;
-  margin-top: 45px;
-  border: #000000;
+  margin-top: 15px;
+  border: #f4f4ea7d;
   border-style: solid;
-  border-width: 4px;
+  border-width: 3px;
+  border-radius: 8px;
+  padding: 25px;
+}
+
+.upcoming-bookings-title,
+.past-bookings-title {
+  font-size: 3.1em;
+  color: #cd4545f3;
+  margin: auto;
+  margin-top: 75px;
+  margin-bottom: 27px;
+  margin-left: 49px;
+  align-items: center;
+  text-shadow: 4px 7px 11px #000000;
+
 }
 
 
