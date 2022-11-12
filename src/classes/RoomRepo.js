@@ -8,11 +8,10 @@ class RoomRepo {
   }
   //returns an array
 
-  filterByAvailable(year, month, day, futureBookings) { //<------taking these from the user input area, make sure they are strings
-    if (typeof year === 'string' && typeof month === 'string' && typeof day === 'string') {
+  filterByAvailable(dateRequest, futureBookings) { 
+    //make sure argument is formatted the way we want
 
-      const dateRequest = [year, month, day].join('/');
-      const dateRequestNums = [+year, +month, +day];
+      const dateRequestNums = dateRequest.split('/').map(num => +num)
       let dateRequestIsFuture = '';
 
       const todaysDate = new Date();
@@ -38,7 +37,7 @@ class RoomRepo {
         return !futureBookings.find(booking => booking.roomNumber === room.number && booking.date === dateRequest)
           && dateRequestIsFuture
       });
-    }
+    
   }
   //returns an array
 }

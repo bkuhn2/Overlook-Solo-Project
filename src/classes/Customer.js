@@ -20,8 +20,8 @@ class Customer {
     const bookingData = {};
     bookingData["userID"] = this.id;
     bookingData["date"] = date; // needs to be either passed in as a complete string or joined here
-    bookingData["room Number"] = roomNumber;
-
+    bookingData["roomNumber"] = roomNumber;
+    
     return bookingData;
   }
 

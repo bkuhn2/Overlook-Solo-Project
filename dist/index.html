@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Overlook Hotel</title>
 </head>
-<body class="home-background">
+<body id="body" class="home-background">
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   <nav class="nav-bar">
     <h1 class="nav-title-text">Welcome back, Faustino Quitzon!</h1>
     <div class="nav-button-area">
-      <button type="button" class="nav-button">View My Bookings</button>
-      <button type="button" class="nav-button">Book a Room</button>
-      <button type="button" class="nav-button hide">Back to Home</button>
-      <button type="button" class="nav-button">What is this site anyway?</button>
+      <button type="button" class="nav-button" id="navViewBookings">View My Bookings</button>
+      <button type="button" class="nav-button" id="navBookRoom">Book a Room</button>
+      <button type="button" class="nav-button" id="navAbout">What is this site anyway?</button>
+      <button type="button" class="nav-button invisible" id="navBackHome">Back to Home</button>
     </div>
   </nav>
   <main class="home-page">
@@ -22,47 +22,48 @@
     <p class="home-welcome-text">Donec egestas molestie rutrum. Donec ex lorem, tempus at rutrum nec, mattis vitae nisl. Vivamus malesuada justo nulla, eget euismod libero laoreet at. Nullam urna orci, sollicitudin id ultricies at, volutpat at metus. Nullam vitae feugiat ex, eget posuere tellus. In nisi purus, elementum ut suscipit non, lobortis nec nulla. Integer eget ipsum in mauris pellentesque placerat vel in lorem. </p>
     <p class="home-get-started-text"> 👈 Ready to book? Want to see your past visits? Get started in the dashboard on the left.</p>
   </main><!-- home page -->
-  <main class="my-bookings- hide">
+  <main class="my-bookings hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="my-bookings-heading-text">My Bookings</h2>
-    <div class="my-bookings-button-area">
-      <button type="button" class="my-bookings-button">Past Bookings</button>
-      <button type="button" class="my-bookings-button-grey">Upcoming Bookings</button>
-    </div>
-    <p class="past-booking-spend-text">You have spent $2,002 with us so far!</p>
-    <section class="my-bookings-display-area">
+    <h3 class="past-booking-spend-text">You have spent $2,002 with us so far!</h3>
+    <h4 class="bookingsExplaination">Below are all of your upcoming and past bookings.</h4>
+    <h5 class="upcoming-bookings-title">Upcoming Bookings</h5>
+    <section class="my-upcoming-bookings-display-area">
      <!-- here go bookings --> 
     </section>
+    <h6 class="past-bookings-title">Past Bookings</h6>
+    <section class="my-past-bookings-display-area">
+      <!-- here go bookings --> 
+     </section>
   </main><!-- my bookings page -->
   <main class="booking-page hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="booking-heading-text">Book Your Next Stay</h2>
     <form class="booking-input-form">
-      <div class="booking-input-block">
-        <input class="booking-input-field" type="number" id="bookingYear" required="number" placeholder="YYYY">
-        <!-- make sure after searching (button event listener) that the placeholder/value goes back to this -->
-        <label for="bookingYear" class="booking-label">Enter the year in numerical form</label>
-      </div>
-      <div class="booking-input-block">
-        <input class="booking-input-field" type="number" id="bookingMonth" required="number" placeholder="MM">
-        <label for="bookingMonth" class="booking-label">Enter the month in numerical form (i.e., January would be 01)</label>
-      </div>
-      <div class="booking-input-block">
-        <input class="booking-input-field" type="number" id="bookingDay" required="number" placeholder="DD">
-        <label for="bookingDay" class="booking-label">Enter the date in numerical form</label>
-      </div>
+      <input class="booking-input-field" type="date" id="bookingInput">
       <button type="button" class="check-availability-button">Check Availability</button>
     </form>
-    <div class="available-filter-area">
-      <h4 class="filter-title-text">Filter your results by room type</h4>
-      <select name="typeFilter" id="typeFilter">
-        <option disabled selected value> select a type to filter</option>
-        <option value="type1">type1</option>
-        <option value="type2">type2</option>
-        <option value="type3">type3</option>
-      </select>
-      <button type="button" class="available-filter-button">Filter</button>
-    </div>
+    <section class="booking-search-control-panel">
+      <div class="booking-confirm-area invisible">
+        <h3 class="booking-confirm-title-text">Confirm Booking</h3>
+        <p class="booking-confirm-text">Book this ${ROOM DATA HERE} on ${DATE}?</p>
+        <button type="button" class="book-button">BOOK</button>
+      </div>
+      <div class="booking-error-notification-area">
+        <p class="booking-error-text hide" id="invalidDateText">Please enter a valid date.</p>
+        <p class="booking-error-text hide" id="noAvailableRoomsText">Sorry, no rooms available on the requested date.</p>
+      </div>
+      <div class="available-filter-area invisible">
+        <h4 class="filter-title-text">Filter your results by room type</h4>
+        <select name="typeFilter" id="typeFilter">
+          <option disabled selected value> select a type to filter</option>
+          <option value="type1">type1</option>
+          <option value="type2">type2</option>
+          <option value="type3">type3</option>
+        </select>
+        <button type="button" class="available-filter-button">Filter</button>
+      </div>
+    </section>
     <section class="available-rooms-display-area">
       <!-- here go available rooms or filtered rooms --> 
     </section>

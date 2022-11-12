@@ -65,14 +65,14 @@ describe('Room Repo', function() {
   });
 
   it('should filter its rooms by which are available', function() {
-    expect(roomRepo1.filterByAvailable("2023", "02", "22", bookingRepoTest.sortBookingsByToday().futureBookings))
+    expect(roomRepo1.filterByAvailable("2023/02/22", bookingRepoTest.sortBookingsByToday().futureBookings))
       .to.deep.equal(roomRepo1.list);
-    expect(roomRepo1.filterByAvailable("2023", "11", "17", bookingRepoTest.sortBookingsByToday().futureBookings))
+    expect(roomRepo1.filterByAvailable("2023/11/17", bookingRepoTest.sortBookingsByToday().futureBookings))
       .to.deep.equal(november17FilteredRooms);
   }); 
 
   it('should not list any rooms if you request a date in the past', function() {
-    expect(roomRepo1.filterByAvailable("2022", "11", "10", bookingRepoTest.sortBookingsByToday().futureBookings))
+    expect(roomRepo1.filterByAvailable("2022/11/10", bookingRepoTest.sortBookingsByToday().futureBookings))
       .to.deep.equal([]);
   }); 
 });
