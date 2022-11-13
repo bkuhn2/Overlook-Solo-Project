@@ -21,6 +21,7 @@ let allRooms;
 let currentPage; //??
 let requestedDate;
 let selectedRoom;
+let searchResults;
 
 
 
@@ -94,7 +95,7 @@ navButtonBackHome.addEventListener('click', loadHomePage);
 
 
 //// 📖 Booking Page //////
-
+checkAvailabilityButton.addEventListener('click', displaySearchResults);
 
 
 
@@ -216,6 +217,43 @@ function populateMyPastBookings() {
 
 //// 📖 Booking Page //////
 
+function reformatInput(inputValue) {
+  //make the input into the string we like and return it
+}
+
+function checkInput() {
+  /* In here: check the input and depeninding on what's wrong,
+      unhide certain error messages and set timeout AND return false
+      
+      But if it's good,
+      requestedDate = reformatInput(inputValue whatever)
+      return true
+      */
+}
+
+function makeFilterTypes(searchResults) {
+  //clear filter dropdown inner html
+  //take search results and iterate over to make that the drop down
+}
+
+function displaySearchResults() {
+
+  //check if input is valid
+
+  /*if input is valid, then...
+
+    search results area = ''
+
+    searchResults = allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings)
+
+    make filter types function
+
+    searchResults.forEach 
+      search results area += all this jazz
+
+*/
+
+}
 
 
 
