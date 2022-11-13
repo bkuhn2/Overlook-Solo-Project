@@ -57,6 +57,7 @@ const bookingConfirmArea = document.querySelector('.booking-confirm-area');
 const bookingConfirmText = document.querySelector('.booking-confirm-text');
 const bookingErrorTextInvalidDate = document.querySelector('#invalidDateText');
 const bookingErrorTextNoAvailable = document.querySelector('#noAvailableRoomsText');
+const bookingErrorTextPastDate = document.querySelector('#pastDateText');
 const filterArea = document.querySelector('.available-filter-area');
 const filterDropDown = document.querySelector('#typeFilter');
 const filterButton = document.querySelector('.available-filter-button');
@@ -223,7 +224,36 @@ function reformatInput(inputValue) {
   return inputValue.split('-').join('/');
 }
 
-function checkInput() {
+function checkInputFuture(inputValue) {
+  const inputNums = inputValue.split('-').map(num => +num)
+  const todaysDate = new Date();
+  const thisYear = todaysDate.getFullYear();
+  const thisMonth = todaysDate.getMonth() + 1;
+  const thisDay = todaysDate.getDate();
+
+  if (inputNums[0] < thisYear) {
+    return false;
+  } else if (inputNums[0] > thisYear) {
+    return true;
+  } else if (inputNums[1] < thisMonth) {
+    return false;
+  } else if (inputNums[1] > thisMonth) {
+    return true;
+  } else if (inputNums[2] < thisDay) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+// window.addEventListener('click', function () {console.log(checkInputFuture('2021-14-33'))})
+
+function checkInputValid(inputValue) {
+
+  if (!checkInputFuture(inputValue)) {
+    //please enter a date in the future
+  }
+  
   /* In here: check the input and depeninding on what's wrong,
       unhide certain error messages and set timeout AND return false
       
