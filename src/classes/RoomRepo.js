@@ -3,8 +3,8 @@ class RoomRepo {
     this.list = rooms;
   }
 
-  filterByType(type) { //takes in type selection in filter dropdown HTML
-    return this.list.filter(room => room.roomType === type)
+  filterByType(type, availableRooms) { //takes in type selection in filter dropdown HTML
+    return availableRooms.filter(room => room.roomType === type)
   }
   //returns an array
 

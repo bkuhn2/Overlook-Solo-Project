@@ -23,10 +23,10 @@ describe('Room Repo', function() {
     expect(roomRepo1.list).to.deep.equal(sampleRoomsForRepo)
   });
 
-  it('should filter its rooms by type', function() {
-    expect(roomRepo1.filterByType()).to.be.a('array');
-    expect(roomRepo1.filterByType('presidential suite')).to.deep.equal([]);
-    expect(roomRepo1.filterByType('residential suite')).to.deep.equal([
+  it('should filter some rooms by type', function() {
+    expect(roomRepo1.filterByType('', sampleRoomsForRepo)).to.be.a('array');
+    expect(roomRepo1.filterByType('presidential suite', sampleRoomsForRepo)).to.deep.equal([]);
+    expect(roomRepo1.filterByType('residential suite', sampleRoomsForRepo)).to.deep.equal([
       {
         number: 1,
         roomType: "residential suite",
@@ -44,7 +44,7 @@ describe('Room Repo', function() {
         costPerNight: 176.36
       }
     ]);
-    expect(roomRepo1.filterByType('single room')).to.deep.equal([
+    expect(roomRepo1.filterByType('single room', sampleRoomsForRepo)).to.deep.equal([
       {
         number: 3,
         roomType: "single room",
