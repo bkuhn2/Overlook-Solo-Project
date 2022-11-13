@@ -249,18 +249,33 @@ function checkInputFuture(inputValue) {
 // window.addEventListener('click', function () {console.log(checkInputFuture('2021-14-33'))})
 
 function checkInputValid(inputValue) {
+  const inputNums = inputValue.split('-').map(num => +num);
+  const months31 = [1, 3, 5, 7, 8, 10, 12]
+  const months30 = [4, 6, 9, 11]
 
-  if (!checkInputFuture(inputValue)) {
-    //please enter a date in the future
+  if (inputValue === '') {
+    unHide(bookingErrorTextInvalidDate);
+    return false;
+    } else if (!checkInputFuture(inputValue)) {
+    unHide(bookingErrorTextPastDate);
+    return false;
+  } else if (months31.includes(inputNums[1]) && inputNums[2] > 31) {
+    unHide(bookingErrorTextInvalidDate);
+    return false;
+  } else if (months30.includes(inputNums[1]) && inputNums[2] > 30) {
+    unHide(bookingErrorTextInvalidDate);
+    return false;
+  } else if (inputNums[1] === 2 & inputNums[2] > 28) {
+    //NOTE: the Overlook Hotel does not book leap year dates.
+    unHide(bookingErrorTextInvalidDate);
+    return false;
+  } else if (inputValue === '') {
+    unHide(bookingErrorTextInvalidDate);
+    return false;
+  } else {
+    requestedDate = reformatInput(inputValue);
+    return true;
   }
-  
-  /* In here: check the input and depeninding on what's wrong,
-      unhide certain error messages and set timeout AND return false
-      
-      But if it's good,
-      requestedDate = reformatInput(inputValue whatever)
-      return true
-      */
 }
 
 function makeFilterTypes(searchResults) {
@@ -269,6 +284,8 @@ function makeFilterTypes(searchResults) {
 }
 
 function displaySearchResults() {
+
+  //clear error message display by hiding all
 
   //check if input is valid
 
@@ -279,6 +296,7 @@ function displaySearchResults() {
     searchResults = allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings)
 
     make filter types function
+    unhide filter area
 
     searchResults.forEach 
       search results area += all this jazz
@@ -287,9 +305,16 @@ function displaySearchResults() {
 
 }
 
+//need clear search results fxn
+//    hide all error messages
+//    wipe all inner html
+//    hide filter
+//    hide selection panel
 
 
+/////////////////////
 //// 🤓 Helper //////
+/////////////////////
 function hide(element) {
   element.classList.add('hide');
 }
