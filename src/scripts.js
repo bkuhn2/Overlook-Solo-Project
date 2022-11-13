@@ -1,8 +1,13 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
+
+import retrieveData from './apiCalls';
+import Customer from './classes/Customer';
+import Booking from './classes/Booking';
+import BookingRepo from './classes/BookingRepo';
+import RoomRepo from './classes/RoomRepo';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
@@ -34,9 +39,11 @@ const navButtonAbout = document.querySelector('#navAbout');
 //// 🏡 Home Page //////
 const homePage = document.querySelector('.home-page');
 
-//// 🤡 My Bookings Page //////
+//// 🤡 Dashboard Page //////
 const myBookingsPage = document.querySelector('.my-bookings');
 const myBookingSpendText = document.querySelector('.past-booking-spend-text');
+const myUpcomingBookingTitle = document.querySelector('.upcoming-bookings-title');
+const myPastBookingTitle = document.querySelector('.past-bookings-title');
 const myUpcomingBookingDisplay = document.querySelector('.my-upcoming-bookings-display-area');
 const myPastBookingDisplay = document.querySelector('.my-past-bookings-display-area');
 
@@ -54,12 +61,25 @@ const filterDropDown = document.querySelector('#typeFilter');
 const filterButton = document.querySelector('.available-filter-button');
 const availableRoomsDisplayArea = document.querySelector('.available-rooms-display-area');
 
-//// ⁉ About Page //////
-// const aboutPage = 'tbd';
+//// 🤨 About Page //////
+// const aboutPage TBD
 
 
 // INITIAL FETCH ON PAGE LOAD ----------------------------------------------->
 
+Promise.all([
+  retrieveData('http://localhost:3001/api/v1/customers'), 
+  retrieveData('http://localhost:3001/api/v1/rooms'), 
+  retrieveData('http://localhost:3001/api/v1/bookings')]).then(data => {
+
+    currentCustomer = new Customer(data[0].customers[3], data[2].bookings) // will need to be based on login iteration eventually
+    allBookings = new BookingRepo(data[2].bookings);
+    allRooms = new RoomRepo(data[1].rooms);
+
+    navBarHeading.innerText = `Welcome back, ${currentCustomer.name}!`
+
+    populateDashboard()
+  })
 
 
 // EVENT LISTENERS ---------------------------------------------------------->
@@ -70,6 +90,10 @@ navButtonBookRoom.addEventListener('click', loadBookingPage);
 navButtonBackHome.addEventListener('click', loadHomePage);
 // remember the about page
 
+//// 🤡 Dashboard Page //////
+
+
+//// 📖 Booking Page //////
 
 
 
@@ -92,6 +116,8 @@ function loadMyDashboard() {
   pageBody.classList.remove('home-background');
   pageBody.classList.remove('booking-background');
   //remove about backround
+
+  populateDashboard()
 }
 
 function loadBookingPage() {
@@ -131,6 +157,66 @@ function loadHomePage() {
 function loadAboutPage() {
 //tbd
 }
+
+
+
+//// 🤡 Dashboard Page //////
+function populateDashboard() {
+  populateMoneySpent();
+  populateMyUpcomingBookings();
+  populateMyPastBookings();
+  //idea for refactoring later - make the upcoming/past headings clickable, which unhides the display cards?
+}
+
+function populateMoneySpent() {
+  const moneySpent = currentCustomer.findTotalMoneySpent(allRooms.list).toFixed(2);
+  myBookingSpendText.innerText = `You have spent $${moneySpent} with us so far!`;
+}
+
+function populateMyUpcomingBookings() {
+  myUpcomingBookingTitle.innerText = `Upcoming Bookings: ${currentCustomer.bookings.sortBookingsByToday().futureBookings.length}`;
+
+  myUpcomingBookingDisplay.innerHTML = '';
+
+  currentCustomer.bookings.sortBookingsByToday().futureBookings.forEach(booking => {
+    myUpcomingBookingDisplay.innerHTML += `
+      <section class="future-booking-record-display">
+        <p class="booking-record-title-text">Your Upcoming Trip on ${booking.date}</p>
+        <ul>
+          <li class="booking-record-list-item">room number ${booking.findRoom(allRooms.list).number}</li>
+          <li class="booking-record-list-item">${booking.findRoom(allRooms.list).roomType}</li>
+          <li class="booking-record-list-item">${booking.findRoom(allRooms.list).numBeds} ${booking.findRoom(allRooms.list).bedSize} bed(s)</li>
+          <li class="booking-record-list-item">rate: ${booking.findRoom(allRooms.list).costPerNight}</li>
+        </ul>
+      </section>
+    `;
+  })
+}
+
+function populateMyPastBookings() {
+  myPastBookingTitle.innerText = `Past Bookings: ${currentCustomer.bookings.sortBookingsByToday().pastBookings.length}`;
+
+  myPastBookingDisplay.innerHTML = '';
+
+  currentCustomer.bookings.sortBookingsByToday().pastBookings.forEach(booking => {
+    myPastBookingDisplay.innerHTML += `
+      <section class="past-booking-record-display">
+        <p class="booking-record-title-text">Your Trip on ${booking.date}</p>
+        <ul>
+          <li class="booking-record-list-item">room number ${booking.findRoom(allRooms.list).number}</li>
+          <li class="booking-record-list-item">${booking.findRoom(allRooms.list).roomType}</li>
+          <li class="booking-record-list-item">${booking.findRoom(allRooms.list).numBeds} ${booking.findRoom(allRooms.list).bedSize} bed(s)</li>
+          <li class="booking-record-list-item">spent ${booking.findRoom(allRooms.list).costPerNight}</li>
+        </ul>
+      </section>
+    `;
+  })
+}
+
+
+//// 📖 Booking Page //////
+
+
 
 
 //// 🤓 Helper //////
