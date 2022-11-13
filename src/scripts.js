@@ -63,6 +63,7 @@ const filterDropDown = document.querySelector('#typeFilter');
 const filterButton = document.querySelector('.available-filter-button');
 const clearFilterButton = document.querySelector('.clear-filter-button');
 const availableRoomsDisplayArea = document.querySelector('.available-rooms-display-area');
+const bookingSuccessText = document.querySelector('.booking-success-text')
 
 //// 🤨 About Page //////
 // const aboutPage TBD
@@ -381,8 +382,16 @@ function clearFilteredResults() {
   makeInvisible(clearFilterButton);
 }
 
-function showBookingConfirmArea() {
+function showBookingConfirmArea(event) {
+  console.log(event.target);
+  if (event.target.className === 'room-select-button') {
+    const dateComponents = requestedDate.split('/')
+    const displayDate = `${+dateComponents[1]}/${+dateComponents[2]}/${+dateComponents[0]}`
+    makeVisible(bookingConfirmArea);
+    selectedRoom = allRooms.list.find(room => room.number === +event.target.parentElement.id)
+    bookingConfirmText.innerText = `Book Room ${selectedRoom.number} on ${displayDate}?`
   
+  }
 }
 
 
