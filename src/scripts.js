@@ -319,29 +319,47 @@ function displaySearchResults() {
   checkInputValid(dateInput.value);
 
   if (checkInputValid(dateInput.value)) {
-    searchResults = allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings)
 
+    searchResults = allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings)
+    
     makeFilterTypes(searchResults);
     makeVisible(filterArea);
 
-    
+    searchResults.forEach(room => {
+      const roomTypeDisplay = room.roomType.toUpperCase();
+      if (room.bidet) {
+        availableRoomsDisplayArea.innerHTML += `
+        <section class="available-room" id="${room.number}">
+          <p class="room-title">${roomTypeDisplay}</p>
+          <ul class="room-list">
+            <li class="room-feature">Room #${room.number}</li>
+            <li class="room-feature">${room.numBeds} ${room.bedSize} bed(s)</li>
+            <li class="room-feature">Has a bidet</li>
+            <li class="room-feature">$${room.costPerNight} per night</li>
+          </ul>
+          <button class="room-select-button" type="button">Select This Room</button>
+        </section>
+        `;
+      } else {
+        availableRoomsDisplayArea.innerHTML += `
+        <section class="available-room" id="${room.number}">
+          <p class="room-title">${roomTypeDisplay}</p>
+          <ul class="room-list">
+            <li class="room-feature">Room #${room.number}</li>
+            <li class="room-feature">${room.numBeds} ${room.bedSize} bed(s)</li>
+            <li class="room-feature">$${room.costPerNight} per night</li>
+          </ul>
+          <button class="room-select-button" type="button">Select This Room</button>
+        </section>
+        `;
+      }
+    });
   }
-
-  /*if input is valid, then...
-
-
-    searchResults = allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings)
-    make filter
- 
-
-    searchResults.forEach 
-      search results area += all this jazz
-
-*/
-
 }
 
 //filter button - clear search results, define filteredSerachResults, repopulate searchresult 
+//add a clear filter button, just re-show searchResults
+
 
 //need clear search results button
 //    hide all error messages

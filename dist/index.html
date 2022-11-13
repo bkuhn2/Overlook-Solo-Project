@@ -17,7 +17,7 @@
       <button type="button" class="nav-button invisible" id="navBackHome">Back to Home</button>
     </div>
   </nav>
-  <main class="home-page">
+  <main class="home-page hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <p class="home-welcome-text">Donec egestas molestie rutrum. Donec ex lorem, tempus at rutrum nec, mattis vitae nisl. Vivamus malesuada justo nulla, eget euismod libero laoreet at. Nullam urna orci, sollicitudin id ultricies at, volutpat at metus. Nullam vitae feugiat ex, eget posuere tellus. In nisi purus, elementum ut suscipit non, lobortis nec nulla. Integer eget ipsum in mauris pellentesque placerat vel in lorem. </p>
     <p class="home-get-started-text"> 👈 Ready to book? Want to see your past visits? Get started in the dashboard on the left.</p>
@@ -36,7 +36,7 @@
       <!-- here go bookings --> 
      </section>
   </main><!-- my bookings page -->
-  <main class="booking-page hide">
+  <main class="booking-page ">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="booking-heading-text">Book Your Next Stay</h2>
     <form class="booking-input-form">
@@ -52,15 +52,12 @@
       <div class="booking-error-notification-area">
         <p class="booking-error-text hide" id="invalidDateText">Please enter a valid date.</p>
         <p class="booking-error-text hide" id="pastDateText">Even though it feels like you've always been here, please choose a date in the future.</p>
-        <p class="booking-error-text hide" id="noAvailableRoomsText">Sorry, no rooms available on the requested date.</p>
+        <p class="booking-error-text hide" id="noAvailableRoomsText">Sorry, no rooms available on the requested date. Look for another date.</p>
       </div>
       <div class="available-filter-area invisible">
         <h4 class="filter-title-text">Filter your results by room type</h4>
         <select name="typeFilter" id="typeFilter">
-          <option disabled selected value> select a type to filter</option>
-          <option value="type1">type1</option>
-          <option value="type2">type2</option>
-          <option value="type3">type3</option>
+          <!-- here go list of types for filter --> 
         </select>
         <button type="button" class="available-filter-button">Filter</button>
       </div>
