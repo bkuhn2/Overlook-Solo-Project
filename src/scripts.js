@@ -1,8 +1,13 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
+
+import retrieveData from './apiCalls';
+import Customer from './classes/Customer';
+import Booking from './classes/Booking';
+import BookingRepo from './classes/BookingRepo';
+import RoomRepo from './classes/RoomRepo';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
@@ -34,7 +39,7 @@ const navButtonAbout = document.querySelector('#navAbout');
 //// 🏡 Home Page //////
 const homePage = document.querySelector('.home-page');
 
-//// 🤡 My Bookings Page //////
+//// 🤡 Dashboard Page //////
 const myBookingsPage = document.querySelector('.my-bookings');
 const myBookingSpendText = document.querySelector('.past-booking-spend-text');
 const myUpcomingBookingDisplay = document.querySelector('.my-upcoming-bookings-display-area');
@@ -60,6 +65,27 @@ const availableRoomsDisplayArea = document.querySelector('.available-rooms-displ
 
 // INITIAL FETCH ON PAGE LOAD ----------------------------------------------->
 
+Promise.all([
+  retrieveData('http://localhost:3001/api/v1/customers'), 
+  retrieveData('http://localhost:3001/api/v1/rooms'), 
+  retrieveData('http://localhost:3001/api/v1/bookings')]).then(data => {
+
+    currentCustomer = new Customer(data[0].customers[3], data[2].bookings) // will need to be based on password iteration eventually
+    allBookings = new BookingRepo(data[2].bookings);
+    allRooms = new RoomRepo(data[1].rooms);
+
+    navBarHeading.innerText = `Welcome back, ${currentCustomer.name}!`
+    //function load dashboard
+
+    // console.log(currentCustomer.bookings.sortBookingsByToday());
+    // console.log(allRooms.filterByAvailable("2023/12/14", allBookings.sortBookingsByToday().futureBookings));
+
+    // console.log('all rooms: ', allRooms);
+    // console.log('current customer: ', currentCustomer);
+    // console.log('allBookings: ', allBookings);
+    // console.log(data)
+
+  })
 
 
 // EVENT LISTENERS ---------------------------------------------------------->
@@ -70,6 +96,10 @@ navButtonBookRoom.addEventListener('click', loadBookingPage);
 navButtonBackHome.addEventListener('click', loadHomePage);
 // remember the about page
 
+//// 🤡 Dashboard Page //////
+
+
+//// 📖 Booking Page //////
 
 
 
@@ -131,6 +161,17 @@ function loadHomePage() {
 function loadAboutPage() {
 //tbd
 }
+
+
+
+//// 🤡 Dashboard Page //////
+
+
+
+
+//// 📖 Booking Page //////
+
+
 
 
 //// 🤓 Helper //////
