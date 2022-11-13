@@ -283,11 +283,26 @@ function makeFilterTypes(searchResults) {
   //take search results and iterate over to make that the drop down
 }
 
+function resetSearchResults() {
+  hide(bookingErrorTextInvalidDate);
+  hide(bookingErrorTextNoAvailable);
+  hide(bookingErrorTextPastDate);
+  makeInvisible(filterArea);
+  makeInvisible(bookingConfirmArea);
+
+  availableRoomsDisplayArea.innerHTML = '';
+  filterDropDown.innerHTML = ''
+  bookingConfirmText.innerText = '';
+}
+
 function displaySearchResults() {
+  
+  resetSearchResults();
+  checkInputValid(dateInput.value);
 
-  //clear error message display by hiding all
-
-  //check if input is valid
+  if (checkInputValid(dateInput.value)) {
+    makeVisible(filterArea);
+  }
 
   /*if input is valid, then...
 
@@ -309,7 +324,7 @@ function displaySearchResults() {
 //    hide all error messages
 //    wipe all inner html
 //    hide filter
-//    hide selection panel
+//    hide selection panel booking confirm area
 
 
 /////////////////////
