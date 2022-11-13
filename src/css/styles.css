@@ -398,7 +398,22 @@ main {
   background-color: #616b6bd3;
   color: rgb(240, 240, 239);
   font-size: 1.2em;
+}
 
+.clear-filter-button {
+  margin-top: 9px;
+  font-size: 1.2em;
+  height: 35px;
+  width: 180px;
+  border-radius: 11px;
+  border-style: solid;
+  border-color: #f9f9f957;
+  border-width: 2px;
+  border-style: solid;
+  border-image: none;
+  background-color: #434747d3;
+  color: rgb(240, 240, 239);
+  font-size: 1.0em;
 }
 
 .available-rooms-display-area {

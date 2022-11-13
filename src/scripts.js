@@ -98,6 +98,8 @@ navButtonBackHome.addEventListener('click', loadHomePage);
 
 //// 📖 Booking Page //////
 checkAvailabilityButton.addEventListener('click', displaySearchResults);
+filterButton.addEventListener('click', displayFilteredResults);
+//clear filter results
 
 
 
@@ -247,8 +249,6 @@ function checkInputFuture(inputValue) {
   }
 }
 
-// window.addEventListener('click', function () {console.log(checkInputFuture('2021-14-33'))})
-
 function checkInputValid(inputValue) {
   const inputNums = inputValue.split('-').map(num => +num);
   const months31 = [1, 3, 5, 7, 8, 10, 12]
@@ -320,12 +320,12 @@ function displaySearchResults() {
 
   if (checkInputValid(dateInput.value)) {
 
-    searchResults = allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings)
+    searchResults = new RoomRepo(allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings))
     
-    makeFilterTypes(searchResults);
+    makeFilterTypes(searchResults.list);
     makeVisible(filterArea);
 
-    searchResults.forEach(room => {
+    searchResults.list.forEach(room => {
       const roomTypeDisplay = room.roomType.toUpperCase();
       if (room.bidet) {
         availableRoomsDisplayArea.innerHTML += `
@@ -357,8 +357,13 @@ function displaySearchResults() {
   }
 }
 
-//filter button - clear search results, define filteredSerachResults, repopulate searchresult 
-//add a clear filter button, just re-show searchResults
+function displayFilteredResults() {
+  availableRoomsDisplayArea.innerHTML = '';
+  filteredSearchResults = searchResults.filterByType
+}
+
+//filter button - clear search results, define filteredSerachResults, repopulate searchresult, show clear filter
+//add a clear filter button, just re-show searchResults, then makes itself inivisble
 
 
 //need clear search results button
