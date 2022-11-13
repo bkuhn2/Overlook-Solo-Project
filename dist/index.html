@@ -11,7 +11,7 @@
   <nav class="nav-bar">
     <h1 class="nav-title-text">Welcome back, JACK!</h1>
     <div class="nav-button-area">
-      <button type="button" class="nav-button" id="navViewBookings">View My Bookings</button>
+      <button type="button" class="nav-button" id="navViewBookings">View My Booking Dashboard</button>
       <button type="button" class="nav-button" id="navBookRoom">Book a Room</button>
       <button type="button" class="nav-button" id="navAbout">What is this site anyway?</button>
       <button type="button" class="nav-button invisible" id="navBackHome">Back to Home</button>
@@ -39,6 +39,9 @@
   <main class="booking-page hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="booking-heading-text">Book Your Next Stay</h2>
+    <div class="booking-instructions-area">
+      <p class="booking-instructions">Check and see if we have any rooms available on the date you want. If we do, select the room card below and confirm your selection up here at the top.</p>
+    </div>
     <form class="booking-input-form">
       <input class="booking-input-field" type="date" id="bookingInput">
       <button type="button" class="check-availability-button">Check Availability</button>
@@ -49,10 +52,11 @@
         <p class="booking-confirm-text">Book this ${ROOM DATA HERE} on ${DATE}?</p>
         <button type="button" class="book-button">BOOK</button>
       </div>
-      <div class="booking-error-notification-area">
+      <div class="notification-area">
         <p class="booking-error-text hide" id="invalidDateText">Please enter a valid date.</p>
-        <p class="booking-error-text hide" id="pastDateText">Even though it feels like you've always been here, please choose a date in the future.</p>
+        <p class="booking-error-text hide" id="pastDateText">Even though you've always been here, please choose a date in the future.</p>
         <p class="booking-error-text hide" id="noAvailableRoomsText">Sorry, no rooms available on the requested date. Look for another date.</p>
+        <p class="booking-success-text ">You have successfully booked this room! You can find it in your Booking Dashboard.</p>
       </div>
       <div class="available-filter-area invisible">
         <h4 class="filter-title-text">Filter your results by room type</h4>
