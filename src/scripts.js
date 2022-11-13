@@ -100,8 +100,9 @@ checkAvailabilityButton.addEventListener('click', displaySearchResults);
 
 
 // FUNCTIONS ---------------------------------------------------------------->
-
+//////////////////////
 //// 🗺 Nav Bar //////
+//////////////////////
 function loadMyDashboard() {
   hide(homePage);
   hide(bookingPage);
@@ -160,8 +161,9 @@ function loadAboutPage() {
 }
 
 
-
+/////////////////////////////
 //// 🤡 Dashboard Page //////
+/////////////////////////////
 function populateDashboard() {
   populateMoneySpent();
   populateMyUpcomingBookings();
@@ -214,11 +216,11 @@ function populateMyPastBookings() {
   })
 }
 
-
+///////////////////////////
 //// 📖 Booking Page //////
-
+///////////////////////////
 function reformatInput(inputValue) {
-  //make the input into the string we like and return it
+  return inputValue.split('-').join('/');
 }
 
 function checkInput() {
