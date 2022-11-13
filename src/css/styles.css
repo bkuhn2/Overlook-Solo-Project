@@ -22,6 +22,7 @@ main {
 /* NAV BAR ------------------------------------------------------*/
 .nav-bar {
   width: 420px;
+  min-width: 420px;
   min-height: 100pc;
   background-color: #00000075;
   border-style: solid;

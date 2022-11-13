@@ -22,6 +22,7 @@ let currentPage; //??
 let requestedDate;
 let selectedRoom;
 let searchResults;
+let filteredSearchResults;
 
 
 
@@ -256,7 +257,10 @@ function checkInputValid(inputValue) {
   if (inputValue === '') {
     unHide(bookingErrorTextInvalidDate);
     return false;
-    } else if (!checkInputFuture(inputValue)) {
+  } else if (inputValue.split('-')[0].length > 4) {
+    unHide(bookingErrorTextInvalidDate);
+    return false;
+  } else if (!checkInputFuture(inputValue)) {
     unHide(bookingErrorTextPastDate);
     return false;
   } else if (months31.includes(inputNums[1]) && inputNums[2] > 31) {
@@ -279,8 +283,22 @@ function checkInputValid(inputValue) {
 }
 
 function makeFilterTypes(searchResults) {
-  //clear filter dropdown inner html
-  //take search results and iterate over to make that the drop down
+  filterDropDown.innerHTML = `
+  <option disabled selected value> select a room type to filter</option>
+  `;
+
+  const listOfTypes = [];
+  searchResults.forEach(room => {
+    if (!listOfTypes.includes(room.roomType)) {
+      listOfTypes.push(room.roomType)
+    }
+  });
+
+  listOfTypes.forEach(type => {
+    filterDropDown.innerHTML += `
+    <option value="${type}">${type}</option>
+    `
+  });
 }
 
 function resetSearchResults() {
@@ -291,7 +309,7 @@ function resetSearchResults() {
   makeInvisible(bookingConfirmArea);
 
   availableRoomsDisplayArea.innerHTML = '';
-  filterDropDown.innerHTML = ''
+  filterDropDown.innerHTML = '';
   bookingConfirmText.innerText = '';
 }
 
@@ -301,17 +319,20 @@ function displaySearchResults() {
   checkInputValid(dateInput.value);
 
   if (checkInputValid(dateInput.value)) {
+    searchResults = allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings)
+
+    makeFilterTypes(searchResults);
     makeVisible(filterArea);
+
+    
   }
 
   /*if input is valid, then...
 
-    search results area = ''
 
     searchResults = allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings)
-
-    make filter types function
-    unhide filter area
+    make filter
+ 
 
     searchResults.forEach 
       search results area += all this jazz
@@ -320,11 +341,14 @@ function displaySearchResults() {
 
 }
 
-//need clear search results fxn
+//filter button - clear search results, define filteredSerachResults, repopulate searchresult 
+
+//need clear search results button
 //    hide all error messages
 //    wipe all inner html
 //    hide filter
 //    hide selection panel booking confirm area
+//    reset input value
 
 
 /////////////////////
