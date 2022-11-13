@@ -49,7 +49,6 @@ const myPastBookingTitle = document.querySelector('.past-bookings-title');
 const myUpcomingBookingDisplay = document.querySelector('.my-upcoming-bookings-display-area');
 const myPastBookingDisplay = document.querySelector('.my-past-bookings-display-area');
 
-
 //// 📖 Booking Page //////
 const bookingPage = document.querySelector('.booking-page');
 const dateInput = document.querySelector('.booking-input-field');
@@ -62,6 +61,7 @@ const bookingErrorTextPastDate = document.querySelector('#pastDateText');
 const filterArea = document.querySelector('.available-filter-area');
 const filterDropDown = document.querySelector('#typeFilter');
 const filterButton = document.querySelector('.available-filter-button');
+const clearFilterButton = document.querySelector('.clear-filter-button');
 const availableRoomsDisplayArea = document.querySelector('.available-rooms-display-area');
 
 //// 🤨 About Page //////
@@ -99,8 +99,8 @@ navButtonBackHome.addEventListener('click', loadHomePage);
 //// 📖 Booking Page //////
 checkAvailabilityButton.addEventListener('click', displaySearchResults);
 filterButton.addEventListener('click', displayFilteredResults);
-//clear filter results
-
+clearFilterButton.addEventListener('click', clearFilteredResults);
+availableRoomsDisplayArea.addEventListener('click', showBookingConfirmArea)
 
 
 // FUNCTIONS ---------------------------------------------------------------->
@@ -112,6 +112,8 @@ function loadMyDashboard() {
   hide(bookingPage);
   // hide(aboutPage);
   unHide(myBookingsPage);
+  resetSearchResults();
+  dateInput.value = '';
 
   makeVisible(navButtonBackHome);
   makeVisible(navButtonBookRoom);
@@ -130,7 +132,9 @@ function loadBookingPage() {
   hide(homePage);
   hide(myBookingsPage);
   // hide(aboutPage);
-  unHide(bookingPage)
+  unHide(bookingPage);
+  resetSearchResults();
+  dateInput.value = '';
 
   makeVisible(navButtonViewBookings);
   makeVisible(navButtonBackHome);
@@ -148,6 +152,8 @@ function loadHomePage() {
   hide(myBookingsPage);
   // hide(aboutPage);
   unHide(homePage)
+  resetSearchResults();
+  dateInput.value = '';
 
   makeVisible(navButtonViewBookings);
   makeVisible(navButtonBookRoom);
@@ -284,7 +290,7 @@ function checkInputValid(inputValue) {
 
 function makeFilterTypes(searchResults) {
   filterDropDown.innerHTML = `
-  <option disabled selected value> select a room type to filter</option>
+    <option disabled selected value>select a room type to filter</option>
   `;
 
   const listOfTypes = [];
@@ -313,65 +319,71 @@ function resetSearchResults() {
   bookingConfirmText.innerText = '';
 }
 
+function populateSearchResultsArea(roomList) {
+  roomList.forEach(room => {
+    const roomTypeDisplay = room.roomType.toUpperCase();
+    if (room.bidet) {
+      availableRoomsDisplayArea.innerHTML += `
+      <section class="available-room" id="${room.number}">
+        <p class="room-title">${roomTypeDisplay}</p>
+        <ul class="room-list">
+          <li class="room-feature">Room #${room.number}</li>
+          <li class="room-feature">${room.numBeds} ${room.bedSize} bed(s)</li>
+          <li class="room-feature">Has a bidet</li>
+          <li class="room-feature">$${room.costPerNight} per night</li>
+        </ul>
+        <button class="room-select-button" type="button">Select This Room</button>
+      </section>
+      `;
+    } else {
+      availableRoomsDisplayArea.innerHTML += `
+      <section class="available-room" id="${room.number}">
+        <p class="room-title">${roomTypeDisplay}</p>
+        <ul class="room-list">
+          <li class="room-feature">Room #${room.number}</li>
+          <li class="room-feature">${room.numBeds} ${room.bedSize} bed(s)</li>
+          <li class="room-feature">$${room.costPerNight} per night</li>
+        </ul>
+        <button class="room-select-button" type="button">Select This Room</button>
+      </section>
+      `;
+    }
+  });
+}
+
 function displaySearchResults() {
-  
   resetSearchResults();
   checkInputValid(dateInput.value);
 
   if (checkInputValid(dateInput.value)) {
-
     searchResults = new RoomRepo(allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings))
     
     makeFilterTypes(searchResults.list);
     makeVisible(filterArea);
-
-    searchResults.list.forEach(room => {
-      const roomTypeDisplay = room.roomType.toUpperCase();
-      if (room.bidet) {
-        availableRoomsDisplayArea.innerHTML += `
-        <section class="available-room" id="${room.number}">
-          <p class="room-title">${roomTypeDisplay}</p>
-          <ul class="room-list">
-            <li class="room-feature">Room #${room.number}</li>
-            <li class="room-feature">${room.numBeds} ${room.bedSize} bed(s)</li>
-            <li class="room-feature">Has a bidet</li>
-            <li class="room-feature">$${room.costPerNight} per night</li>
-          </ul>
-          <button class="room-select-button" type="button">Select This Room</button>
-        </section>
-        `;
-      } else {
-        availableRoomsDisplayArea.innerHTML += `
-        <section class="available-room" id="${room.number}">
-          <p class="room-title">${roomTypeDisplay}</p>
-          <ul class="room-list">
-            <li class="room-feature">Room #${room.number}</li>
-            <li class="room-feature">${room.numBeds} ${room.bedSize} bed(s)</li>
-            <li class="room-feature">$${room.costPerNight} per night</li>
-          </ul>
-          <button class="room-select-button" type="button">Select This Room</button>
-        </section>
-        `;
-      }
-    });
+    populateSearchResultsArea(searchResults.list);
   }
 }
 
 function displayFilteredResults() {
   availableRoomsDisplayArea.innerHTML = '';
-  filteredSearchResults = searchResults.filterByType
+  makeVisible(clearFilterButton);
+  
+  filteredSearchResults = searchResults.filterByType(filterDropDown.value);
+
+  populateSearchResultsArea(filteredSearchResults);
 }
 
-//filter button - clear search results, define filteredSerachResults, repopulate searchresult, show clear filter
 //add a clear filter button, just re-show searchResults, then makes itself inivisble
+function clearFilteredResults() {
+  availableRoomsDisplayArea.innerHTML = '';
+  populateSearchResultsArea(searchResults.list);
+  makeFilterTypes(searchResults.list);
+  makeInvisible(clearFilterButton);
+}
 
-
-//need clear search results button
-//    hide all error messages
-//    wipe all inner html
-//    hide filter
-//    hide selection panel booking confirm area
-//    reset input value
+function showBookingConfirmArea() {
+  
+}
 
 
 /////////////////////
