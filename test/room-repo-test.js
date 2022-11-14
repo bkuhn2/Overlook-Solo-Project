@@ -24,7 +24,7 @@ describe('Room Repo', function() {
   });
 
   it('should filter its rooms by type', function() {
-    expect(roomRepo1.filterByType()).to.be.a('array');
+    expect(roomRepo1.filterByType('')).to.be.a('array');
     expect(roomRepo1.filterByType('presidential suite')).to.deep.equal([]);
     expect(roomRepo1.filterByType('residential suite')).to.deep.equal([
       {

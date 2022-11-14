@@ -11,18 +11,18 @@
   <nav class="nav-bar">
     <h1 class="nav-title-text">Welcome back, JACK!</h1>
     <div class="nav-button-area">
-      <button type="button" class="nav-button" id="navViewBookings">View My Bookings</button>
+      <button type="button" class="nav-button" id="navViewBookings">View My Booking Dashboard</button>
       <button type="button" class="nav-button" id="navBookRoom">Book a Room</button>
       <button type="button" class="nav-button" id="navAbout">What is this site anyway?</button>
       <button type="button" class="nav-button invisible" id="navBackHome">Back to Home</button>
     </div>
   </nav>
-  <main class="home-page hide">
+  <main class="home-page ">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <p class="home-welcome-text">Donec egestas molestie rutrum. Donec ex lorem, tempus at rutrum nec, mattis vitae nisl. Vivamus malesuada justo nulla, eget euismod libero laoreet at. Nullam urna orci, sollicitudin id ultricies at, volutpat at metus. Nullam vitae feugiat ex, eget posuere tellus. In nisi purus, elementum ut suscipit non, lobortis nec nulla. Integer eget ipsum in mauris pellentesque placerat vel in lorem. </p>
     <p class="home-get-started-text"> 👈 Ready to book? Want to see your past visits? Get started in the dashboard on the left.</p>
   </main><!-- home page -->
-  <main class="my-bookings ">
+  <main class="my-bookings hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="my-bookings-heading-text">My Bookings</h2>
     <h3 class="past-booking-spend-text">You have spent $2,002 with us so far!</h3>
@@ -39,6 +39,9 @@
   <main class="booking-page hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="booking-heading-text">Book Your Next Stay</h2>
+    <div class="booking-instructions-area">
+      <p class="booking-instructions">Check and see if we have any rooms available on the date you want. If we do, select the room card below and confirm your selection up here at the top.</p>
+    </div>
     <form class="booking-input-form">
       <input class="booking-input-field" type="date" id="bookingInput">
       <button type="button" class="check-availability-button">Check Availability</button>
@@ -49,19 +52,19 @@
         <p class="booking-confirm-text">Book this ${ROOM DATA HERE} on ${DATE}?</p>
         <button type="button" class="book-button">BOOK</button>
       </div>
-      <div class="booking-error-notification-area">
+      <div class="notification-area">
         <p class="booking-error-text hide" id="invalidDateText">Please enter a valid date.</p>
-        <p class="booking-error-text hide" id="noAvailableRoomsText">Sorry, no rooms available on the requested date.</p>
+        <p class="booking-error-text hide" id="pastDateText">Even though you've always been here, please choose a date in the future.</p>
+        <p class="booking-error-text hide" id="noAvailableRoomsText">Sorry, no rooms available on the requested date. Look for another date.</p>
+        <p class="booking-success-text hide">You have successfully booked this room! You can find it in your Booking Dashboard.</p>
       </div>
       <div class="available-filter-area invisible">
         <h4 class="filter-title-text">Filter your results by room type</h4>
         <select name="typeFilter" id="typeFilter">
-          <option disabled selected value> select a type to filter</option>
-          <option value="type1">type1</option>
-          <option value="type2">type2</option>
-          <option value="type3">type3</option>
+          <!-- here go list of types for filter --> 
         </select>
         <button type="button" class="available-filter-button">Filter</button>
+        <button type="button" class="clear-filter-button invisible">Clear Filter</button>
       </div>
     </section>
     <section class="available-rooms-display-area">
