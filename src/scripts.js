@@ -31,8 +31,10 @@ let filteredSearchResults;
 const pageBody = document.querySelector('#body');
 
 //// 🔑 Log-In Page //////
-
-
+const userNameInput = document.querySelector('#userNameInput');
+const passwordInput = document.querySelector('#passwordInput');
+const loginButton = document.querySelector('.login-button');
+const loginErrorText = document.querySelector('.login-error-text');
 
 //// 🗺 Nav Bar //////
 const navBarHeading = document.querySelector('.nav-title-text');
