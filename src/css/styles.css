@@ -41,7 +41,7 @@ main {
   width: 748px;
   height: 147px;
   border-style: solid;
-  border-width: 1-px;
+  border-width: 1px;
   border-radius: 11px;
   display: flex;
   flex-direction: column;
@@ -105,8 +105,8 @@ main {
   color: #2bffbae7;
   text-shadow: 3px 4px 2px #00000091;
   margin-top: 40px;
-  margin-right: 200px;
-  font-size: 2.3em;
+  margin-right: 10px;
+  font-size: 1.5em;
   font-family: 'Noto Sans Mende Kikakui', sans-serif;
 
 }
@@ -163,21 +163,15 @@ main {
   font-family: 'Noto Sans Mende Kikakui', sans-serif;
 }
 
-/* HOME PAGE ----------------------------------------------------*/
-.home-background {
+/* ABOUT PAGE ----------------------------------------------------*/
+.about-background {
   background-image: linear-gradient(10deg, rgb(30 30 30 / 72%) 19%, rgb(22 22 22 / 89%) 83%), url(/src/images/lobby-image.jpg);
   background-size: cover;
   background-attachment: fixed;
 }
 
-/* .home-welcome-text-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 133px;
-} */
 
-.home-welcome-text {
+.about-text {
   text-align: right;
   width: 1090px;
   font-size: 1.6em;
@@ -341,7 +335,7 @@ main {
 
 /* BOOK A ROOM PAGE ---------------------------------------------*/
 .booking-background {
-  background-image: linear-gradient(0deg, rgb(0 0 0 / 69%) 39%, rgb(14 14 14 / 89%) 83%), url(/src/images/room-image.jpg);
+  background-image: linear-gradient(0deg, rgb(16 16 16 / 79%) 39%, rgb(20 20 20 / 93%) 83%), url(/src/images/room-image.jpg);
   background-size: cover;
   background-attachment: fixed;
 }
