@@ -18,7 +18,6 @@ import './images/turing-logo.png'
 let currentCustomer;
 let allBookings;
 let allRooms;
-let currentPage; //??
 let requestedDate;
 let selectedRoom;
 let searchResults;
@@ -64,7 +63,7 @@ const filterDropDown = document.querySelector('#typeFilter');
 const filterButton = document.querySelector('.available-filter-button');
 const clearFilterButton = document.querySelector('.clear-filter-button');
 const availableRoomsDisplayArea = document.querySelector('.available-rooms-display-area');
-const bookingSuccessText = document.querySelector('.booking-success-text')
+const bookingSuccessText = document.querySelector('.booking-success-text');
 
 
 // INITIAL FETCH ON PAGE LOAD ----------------------------------------------->
