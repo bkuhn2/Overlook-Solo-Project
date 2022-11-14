@@ -59,6 +59,7 @@ const bookButton = document.querySelector('.book-button');
 const bookingErrorTextInvalidDate = document.querySelector('#invalidDateText');
 const bookingErrorTextNoAvailable = document.querySelector('#noAvailableRoomsText');
 const bookingErrorTextPastDate = document.querySelector('#pastDateText');
+const bookingErrorInternalIssue = document.querySelector('#internalErrorText');
 const filterArea = document.querySelector('.available-filter-area');
 const filterDropDown = document.querySelector('#typeFilter');
 const filterButton = document.querySelector('.available-filter-button');
@@ -310,6 +311,7 @@ function resetSearchResults() {
   hide(bookingErrorTextInvalidDate);
   hide(bookingErrorTextNoAvailable);
   hide(bookingErrorTextPastDate);
+  hide(bookingErrorInternalIssue);
   makeInvisible(filterArea);
   makeInvisible(clearFilterButton);
   makeInvisible(bookingConfirmArea);
@@ -402,11 +404,23 @@ function postNewBooking() {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(currentCustomer.makeBookingData(selectedRoom.number, requestedDate))
-  }).then(response => response.json()).then(data => {
+  }).then(response => {
+    
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw new Error('Response not OK - look at issue in body')
+    }
+  })
+    .then(data => {
     unHide(bookingSuccessText);
     setTimeout(hideSuccessText, 4000);
     updateBookings(data.newBooking);
   })
+    .catch(error => {
+      console.log('for the devs: ', error);
+      unHide(bookingErrorInternalIssue);
+    })
 }
 
 function updateBookings(rawBooking) {
