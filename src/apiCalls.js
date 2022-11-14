@@ -1,7 +1,12 @@
 
 function retrieveData(source) {
-  return fetch(source).then(response => response.json())
+  return fetch(source).then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('Issue getting the source data...');
+    }
+  })
 }
 
-//need error handling
 export default retrieveData;

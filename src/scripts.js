@@ -59,6 +59,7 @@ const bookButton = document.querySelector('.book-button');
 const bookingErrorTextInvalidDate = document.querySelector('#invalidDateText');
 const bookingErrorTextNoAvailable = document.querySelector('#noAvailableRoomsText');
 const bookingErrorTextPastDate = document.querySelector('#pastDateText');
+const bookingErrorInternalIssue = document.querySelector('#internalErrorText');
 const filterArea = document.querySelector('.available-filter-area');
 const filterDropDown = document.querySelector('#typeFilter');
 const filterButton = document.querySelector('.available-filter-button');
@@ -72,10 +73,11 @@ const bookingSuccessText = document.querySelector('.booking-success-text')
 
 // INITIAL FETCH ON PAGE LOAD ----------------------------------------------->
 
-Promise.all([
+Promise.all([ //move this to other function w/ login concept
   retrieveData('http://localhost:3001/api/v1/customers'), 
   retrieveData('http://localhost:3001/api/v1/rooms'), 
-  retrieveData('http://localhost:3001/api/v1/bookings')]).then(data => {
+  retrieveData('http://localhost:3001/api/v1/bookings')])
+    .then(data => {
 
     currentCustomer = new Customer(data[0].customers[20], data[2].bookings) // will need to be based on login iteration eventually
     allBookings = new BookingRepo(data[2].bookings);
@@ -85,6 +87,10 @@ Promise.all([
 
     populateDashboard()
   })
+    .catch(error => {
+      console.log('in catch: ', error);
+      //make this something you see on the DOM - but need to figure out login page first..
+    })
 
 
 // EVENT LISTENERS ---------------------------------------------------------->
@@ -310,6 +316,7 @@ function resetSearchResults() {
   hide(bookingErrorTextInvalidDate);
   hide(bookingErrorTextNoAvailable);
   hide(bookingErrorTextPastDate);
+  hide(bookingErrorInternalIssue);
   makeInvisible(filterArea);
   makeInvisible(clearFilterButton);
   makeInvisible(bookingConfirmArea);
@@ -402,11 +409,23 @@ function postNewBooking() {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(currentCustomer.makeBookingData(selectedRoom.number, requestedDate))
-  }).then(response => response.json()).then(data => {
+  }).then(response => {
+    
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw new Error('Response not OK - look at issue in body')
+    }
+  })
+    .then(data => {
     unHide(bookingSuccessText);
     setTimeout(hideSuccessText, 4000);
     updateBookings(data.newBooking);
   })
+    .catch(error => {
+      console.log('for the devs: ', error);
+      unHide(bookingErrorInternalIssue);
+    })
 }
 
 function updateBookings(rawBooking) {
