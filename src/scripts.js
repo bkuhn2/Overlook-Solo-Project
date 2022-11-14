@@ -55,6 +55,7 @@ const dateInput = document.querySelector('.booking-input-field');
 const checkAvailabilityButton = document.querySelector('.check-availability-button');
 const bookingConfirmArea = document.querySelector('.booking-confirm-area');
 const bookingConfirmText = document.querySelector('.booking-confirm-text');
+const bookButton = document.querySelector('.book-button');
 const bookingErrorTextInvalidDate = document.querySelector('#invalidDateText');
 const bookingErrorTextNoAvailable = document.querySelector('#noAvailableRoomsText');
 const bookingErrorTextPastDate = document.querySelector('#pastDateText');
@@ -76,7 +77,7 @@ Promise.all([
   retrieveData('http://localhost:3001/api/v1/rooms'), 
   retrieveData('http://localhost:3001/api/v1/bookings')]).then(data => {
 
-    currentCustomer = new Customer(data[0].customers[3], data[2].bookings) // will need to be based on login iteration eventually
+    currentCustomer = new Customer(data[0].customers[20], data[2].bookings) // will need to be based on login iteration eventually
     allBookings = new BookingRepo(data[2].bookings);
     allRooms = new RoomRepo(data[1].rooms);
 
@@ -92,16 +93,13 @@ Promise.all([
 navButtonViewBookings.addEventListener('click', loadMyDashboard);
 navButtonBookRoom.addEventListener('click', loadBookingPage);
 navButtonBackHome.addEventListener('click', loadHomePage);
-// remember the about page
-
-//// 🤡 Dashboard Page //////
-
 
 //// 📖 Booking Page //////
 checkAvailabilityButton.addEventListener('click', displaySearchResults);
 filterButton.addEventListener('click', displayFilteredResults);
 clearFilterButton.addEventListener('click', clearFilteredResults);
 availableRoomsDisplayArea.addEventListener('click', showBookingConfirmArea)
+bookButton.addEventListener('click', bookRoom)
 
 
 // FUNCTIONS ---------------------------------------------------------------->
@@ -313,6 +311,7 @@ function resetSearchResults() {
   hide(bookingErrorTextNoAvailable);
   hide(bookingErrorTextPastDate);
   makeInvisible(filterArea);
+  makeInvisible(clearFilterButton);
   makeInvisible(bookingConfirmArea);
 
   availableRoomsDisplayArea.innerHTML = '';
@@ -374,7 +373,6 @@ function displayFilteredResults() {
   populateSearchResultsArea(filteredSearchResults);
 }
 
-//add a clear filter button, just re-show searchResults, then makes itself inivisble
 function clearFilteredResults() {
   availableRoomsDisplayArea.innerHTML = '';
   populateSearchResultsArea(searchResults.list);
@@ -383,23 +381,49 @@ function clearFilteredResults() {
 }
 
 function showBookingConfirmArea(event) {
-  console.log(event.target);
   if (event.target.className === 'room-select-button') {
     const dateComponents = requestedDate.split('/')
-    const displayDate = `${+dateComponents[1]}/${+dateComponents[2]}/${+dateComponents[0]}`
+    const displayDate = `${+dateComponents[1]}/${+dateComponents[2]}/${+dateComponents[0]}`;
     makeVisible(bookingConfirmArea);
-    selectedRoom = allRooms.list.find(room => room.number === +event.target.parentElement.id)
-    bookingConfirmText.innerText = `Book Room ${selectedRoom.number} on ${displayDate}?`
-  
+    selectedRoom = allRooms.list.find(room => room.number === +event.target.parentElement.id);
+    bookingConfirmText.innerText = `Book Room ${selectedRoom.number} on ${displayDate}?`;
+    window.scrollTo({top: 0, left: 50, behavior: 'smooth'});
   }
 }
 
+function bookRoom() {
+  resetSearchResults();
+  dateInput.value = '';
+  postNewBooking();
+}
+
+function postNewBooking() {
+  fetch('http://localhost:3001/api/v1/bookings', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(currentCustomer.makeBookingData(selectedRoom.number, requestedDate))
+  }).then(response => response.json()).then(data => {
+    unHide(bookingSuccessText);
+    setTimeout(hideSuccessText, 4000);
+    updateBookings(data.newBooking);
+  })
+}
+
+function updateBookings(rawBooking) {
+  currentCustomer.bookings.list.push(new Booking(rawBooking));
+  allBookings.list.push(new Booking(rawBooking));
+  populateDashboard();
+}
 
 /////////////////////
 //// 🤓 Helper //////
 /////////////////////
 function hide(element) {
   element.classList.add('hide');
+}
+
+function hideSuccessText() {
+  bookingSuccessText.classList.add('hide')
 }
 
 function unHide(element) {
@@ -412,5 +436,4 @@ function makeInvisible(element) {
 
 function makeVisible(element) {
   element.classList.remove('invisible');
-
 }
