@@ -30,6 +30,10 @@ let filteredSearchResults;
 //// 🌎 Body //////
 const pageBody = document.querySelector('#body');
 
+//// 🔑 Log-In Page //////
+
+
+
 //// 🗺 Nav Bar //////
 const navBarHeading = document.querySelector('.nav-title-text');
 const navButtonViewBookings = document.querySelector('#navViewBookings');
@@ -89,6 +93,9 @@ Promise.all([ //move this to other function w/ login concept
 
 
 // EVENT LISTENERS ---------------------------------------------------------->
+
+//// 🔑 Log-In Page //////
+
 
 //// 🗺 Nav Bar //////
 navButtonViewBookings.addEventListener('click', loadMyDashboard);

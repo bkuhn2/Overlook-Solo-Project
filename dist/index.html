@@ -7,9 +7,28 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mende+Kikakui&family=Nunito:wght@300&family=Oswald:wght@500&family=Trade+Winds&display=swap">
   <title>Overlook Hotel</title>
 </head>
-<body id="body" class="home-background">
+<body id="body" class="login-background">
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
-  <nav class="nav-bar">
+  <main class="login-page ">
+    <h1 class="main-heading-text">The Overlook Hotel</h1>
+    <div class="login-page-contents">
+      <section class="login-area">
+        <div class="login-field-area">
+          <div class="login-field">
+            <input class="login-input" id="userNameInput" type="text">
+              <label class="login-label" for="userNameInput">username</label>
+          </div>
+          <div class="login-field">
+            <input class="login-input" id="passwordInput" type="text">
+              <label class="login-label" for="userNameInput">password</label>
+          </div>
+          <button class="login-button" type="button">LOGIN</button>
+        </div>
+      </section>
+      <p class="login-error-text hide">Invalid FILL IN HERE</p>
+    </div>
+  </main>
+  <nav class="nav-bar hide">
     <h1 class="nav-title-text">Welcome back, JACK!</h1>
     <div class="nav-button-area">
       <button type="button" class="nav-button" id="navViewBookings">View My Booking Dashboard</button>
@@ -17,14 +36,14 @@
       <button type="button" class="nav-button clicked" id="navBackHome">Home</button>
     </div>
   </nav>
-  <main class="home-page ">
+  <main class="home-page hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <p class="home-welcome-text">This app simulates a hotel website that lets customers view their past and
       upcoming trips, how much they've spent so far at the hotel, and also book rooms in the future. It was created by Brett Kuhn,
       a student at Turing School of Software and Design in Mod 2 of November 2022 - get started by using
       the navigation bar to the left.</p>
     <a href="https://github.com/bkuhn2" class="github-link-text"> 🔗 github.com/bkuhn2</a>
-  </main><!-- home page -->
+  </main>
   <main class="my-bookings hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="my-bookings-heading-text">My Bookings</h2>
@@ -38,7 +57,7 @@
     <section class="my-past-bookings-display-area">
       <!-- here go bookings --> 
      </section>
-  </main><!-- my bookings page -->
+  </main>
   <main class="booking-page hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="booking-heading-text">Book Your Next Stay</h2>
@@ -77,7 +96,7 @@
     <section class="available-rooms-display-area">
       <!-- here go available rooms or filtered rooms --> 
     </section>
-  </main><!-- book a room page -->
+  </main>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 </body>
