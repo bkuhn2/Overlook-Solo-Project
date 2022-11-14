@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mende+Kikakui&family=Nunito:wght@300&family=Oswald:wght@500&family=Trade+Winds&display=swap">
   <title>Overlook Hotel</title>
 </head>
 <body id="body" class="home-background">
@@ -13,14 +14,16 @@
     <div class="nav-button-area">
       <button type="button" class="nav-button" id="navViewBookings">View My Booking Dashboard</button>
       <button type="button" class="nav-button" id="navBookRoom">Book a Room</button>
-      <button type="button" class="nav-button" id="navAbout">What is this site anyway?</button>
-      <button type="button" class="nav-button invisible" id="navBackHome">Back to Home</button>
+      <button type="button" class="nav-button clicked" id="navBackHome">Home</button>
     </div>
   </nav>
   <main class="home-page ">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
-    <p class="home-welcome-text">Donec egestas molestie rutrum. Donec ex lorem, tempus at rutrum nec, mattis vitae nisl. Vivamus malesuada justo nulla, eget euismod libero laoreet at. Nullam urna orci, sollicitudin id ultricies at, volutpat at metus. Nullam vitae feugiat ex, eget posuere tellus. In nisi purus, elementum ut suscipit non, lobortis nec nulla. Integer eget ipsum in mauris pellentesque placerat vel in lorem. </p>
-    <p class="home-get-started-text"> 👈 Ready to book? Want to see your past visits? Get started in the dashboard on the left.</p>
+    <p class="home-welcome-text">This app simulates a hotel website that lets customers view their past and
+      upcoming trips, how much they've spent so far at the hotel, and also book rooms in the future. It was created by Brett Kuhn,
+      a student at Turing School of Software and Design in Mod 2 of November 2022 - get started by using
+      the navigation bar to the left.</p>
+    <a href="https://github.com/bkuhn2" class="github-link-text"> 🔗 github.com/bkuhn2</a>
   </main><!-- home page -->
   <main class="my-bookings hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
@@ -43,7 +46,10 @@
       <p class="booking-instructions">Check and see if we have any rooms available on the date you want. If we do, select the room card below and confirm your selection up here at the top.</p>
     </div>
     <form class="booking-input-form">
-      <input class="booking-input-field" type="date" id="bookingInput">
+      <div class="booking-input-block">
+        <input class="booking-input-field" type="date" id="bookingInput">
+        <label class="booking-field-label" for="bookingInput">enter the date you'd like to stay</label>
+      </div>
       <button type="button" class="check-availability-button">Check Availability</button>
     </form>
     <section class="booking-search-control-panel">
@@ -61,7 +67,7 @@
       </div>
       <div class="available-filter-area invisible">
         <h4 class="filter-title-text">Filter your results by room type</h4>
-        <select name="typeFilter" id="typeFilter">
+        <select name="typeFilter" id="typeFilter" aria-label="types-to-filter">
           <!-- here go list of types for filter --> 
         </select>
         <button type="button" class="available-filter-button">Filter</button>
@@ -72,7 +78,6 @@
       <!-- here go available rooms or filtered rooms --> 
     </section>
   </main><!-- book a room page -->
-  <main class="hide"></main><!-- errorloading page ??? -->
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 </body>

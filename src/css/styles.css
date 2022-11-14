@@ -17,6 +17,8 @@ main {
   text-align: right;
   margin-top: 17px;
   margin-right: 60px;
+  text-shadow: 2px 4px 18px #00000075;
+  font-family: 'Trade Winds', cursive;
 }
 
 /* NAV BAR ------------------------------------------------------*/
@@ -31,10 +33,11 @@ main {
 
 .nav-title-text {
   font-size: 2.2em;
-  color: #cd4545f3;
-  margin-left: 22px;
+  color: #d64b4bf6;
+  text-align: center;
   margin-top: 45px;
   text-shadow: 7px 6px 16px #000000;
+  font-family: 'Oswald', sans-serif;
 }
 
 .nav-button-area {
@@ -47,21 +50,30 @@ main {
 }
 
 .nav-button {
-  background: #000000a5;
+  background: #00000089;
   width: 276px;
   height: 69px;
   border-radius: 6px;
-  border-width: 5px;
-  border-style: double;
-  border-color: #b3acacac;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #dbd6d6a5;
   border-image: none;
   color: #eae9e3d9;
   font-size: 1.3em;
+  font-family: 'Nunito', sans-serif;
+
+}
+
+.clicked {
+  background-color: rgba(10, 86, 93, 0.442);
+  color: #bbf7f0ab;
+  border-color: #80aba5a7;
+  font-family: 'Noto Sans Mende Kikakui', sans-serif;
 }
 
 /* HOME PAGE ----------------------------------------------------*/
 .home-background {
-  background-image: linear-gradient(10deg, rgb(0 0 0 / 60%) 19%, rgb(39 39 39 / 68%) 83%), url(/src/images/lobby-image.jpg);
+  background-image: linear-gradient(10deg, rgb(30 30 30 / 72%) 19%, rgb(22 22 22 / 89%) 83%), url(/src/images/lobby-image.jpg);
   background-size: cover;
   background-attachment: fixed;
 }
@@ -76,24 +88,30 @@ main {
 .home-welcome-text {
   text-align: right;
   width: 1090px;
-  font-size: 1.5em;
-  color: rgb(202 202 202);
-  font-style: oblique;
+  font-size: 1.6em;
+  color: rgb(237, 236, 236);
   margin: auto;
   margin-right: 60px;
   margin-top: -18px;
+  text-shadow: 4px 5px 18px #000000ad;
+  font-family: 'Nunito', sans-serif;
+
 }
 
-.home-get-started-text {
+.github-link-text {
+  display: block;
   text-align: right;
   width: 1090px;
   font-size: 1.8em;
-  /* background-color: #141414ba; */
-  color: rgb(202 202 202);
+  color: #7cecece7;
   font-style: normal;
   margin: auto;
   margin-right: 60px;
   margin-top: 50px;
+  text-shadow: 4px 5px 18px #000000ad;
+  text-decoration: none;
+  font-family: 'Oswald', sans-serif;
+
 }
 
 /* MY BOOKINGS PAGE ---------------------------------------------*/
@@ -108,12 +126,14 @@ main {
   /* border-style: solid;
   border-color: #f1f1f1a9; */
   font-size: 3.5em;
-  color: #f8c12ab6;
+  color: #f4c134d9;
   margin: auto;
   margin-top: 100px;
   margin-bottom: 30px;
   align-items: center;
   text-shadow: 7px 11px 11px #000000;
+  font-family: 'Oswald', sans-serif;
+
   /* background-color: #a583279c; */
   /* width: 700px;
   height: 55px; */
@@ -140,6 +160,7 @@ main {
   background-color: #00000091;
   padding: 7px;
   text-shadow: 7px 11px 11px #000000;
+  font-family: 'Noto Sans Mende Kikakui', sans-serif;
 }
 
 .bookingsExplanation {
@@ -159,6 +180,7 @@ main {
   background-color: #00000091;
   padding: 7px;
   text-shadow: 7px 11px 11px #000000;
+  font-family: 'Nunito', sans-serif;
 }
 
 .my-upcoming-bookings-display-area,
@@ -181,7 +203,7 @@ main {
 
 .upcoming-bookings-title,
 .past-bookings-title {
-  font-size: 3.1em;
+  font-size: 2.9em;
   color: #cd4545f3;
   margin: auto;
   margin-top: 75px;
@@ -189,6 +211,7 @@ main {
   margin-left: 49px;
   align-items: center;
   text-shadow: 4px 7px 11px #000000;
+  font-family: 'Oswald', sans-serif;
 }
 
 .future-booking-record-display,
@@ -211,13 +234,17 @@ main {
 }
 
 .booking-record-title-text {
-  font-size: 1.3em;
+  font-size: 1.1em;
+  margin: auto;
   margin-left: 15px;
   margin-right: 15px;
+  margin-top: 13px;
+  font-family: 'Noto Sans Mende Kikakui', sans-serif;
 }
 
 .booking-record-list-item {
   font-size: 1.1em;
+  font-family: 'Nunito', sans-serif;
 }
 
 /* BOOK A ROOM PAGE ---------------------------------------------*/
@@ -230,12 +257,13 @@ main {
 .booking-heading-text {
   text-align: center;
   font-size: 3.4em;
-  color: #f8c12ab6;
+  color: #f4c134d9;
   margin: auto;
   margin-top: 80px;
   margin-bottom: 31px;
   align-items: center;
   text-shadow: 7px 11px 11px #000000;
+  font-family: 'Oswald', sans-serif;
 }
 
 .booking-instructions-area {
@@ -254,6 +282,7 @@ main {
   justify-content: center;
   text-align: center;
   width: 775px;
+  font-family: 'Nunito', sans-serif;
 }
 
 .booking-instructions {
@@ -296,13 +325,14 @@ main {
   background-color: #bab8b858;
 }
 
-/* .booking-label { 
+.booking-field-label { 
   width: 260px;
-  margin-top: 15px;
+  margin-top: 7px;
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: rgba(240, 240, 239, 0.914);
-} */
+  font-family: 'Nunito', sans-serif;
+}
 
 .check-availability-button {
   font-size: 1.2em;
@@ -317,10 +347,11 @@ main {
   background-color: #d6000034;
   color: rgb(240, 240, 239);
   font-size: 1.3em;
+  font-family: 'Oswald', sans-serif;
 }
 
 .booking-search-control-panel {
-  width: 1600px;
+  width: 91%;
   margin: auto;
   display: flex;
   flex-direction: row; 
@@ -339,6 +370,7 @@ main {
   color: rgb(240, 240, 239);
   font-size: 2.1em;
   text-shadow: 0px 7px 5px #000000;
+  font-family: 'Oswald', sans-serif;
 }
 
 .booking-confirm-text {
@@ -347,6 +379,8 @@ main {
   text-shadow: 0px 7px 5px #000000;
   text-align: center;
   margin-top: -5px;
+  font-family: 'Nunito', sans-serif;
+
 }
 
 .book-button {
@@ -362,6 +396,7 @@ main {
   background-color: #bd0000c0;
   color: rgb(240, 240, 239);
   font-size: 1.2em;
+  font-family: 'Oswald', sans-serif;
 
 }
 
@@ -381,6 +416,7 @@ main {
   font-size: 1.9em;
   text-shadow: 0px 7px 5px #000000;
   text-align: center;
+  font-family: 'Oswald', sans-serif;
 }
 
 .booking-success-text {
@@ -388,6 +424,7 @@ main {
   font-size: 2.2em;
   text-shadow: 0px 7px 5px #000000;
   text-align: center;
+  font-family: 'Oswald', sans-serif;
 }
 
 .available-filter-area {
@@ -395,12 +432,15 @@ main {
   flex-direction: column;
   align-items: center;
   width: 375px;
+  font-family: 'Nunito', sans-serif;
 }
 
 .filter-title-text {
   color: rgb(240, 240, 239);
   font-size: 1.7em;
-  text-shadow: 0px 7px 5px #000000;
+  text-shadow: 0px 7px 5px #000000;  
+  font-family: 'Oswald', sans-serif;
+
 }
 
 #typeFilter {
@@ -408,6 +448,7 @@ main {
   height: 42px;
   font-size: 1.2em;
   border-radius: 6px;
+  font-family: 'Nunito', sans-serif;
 
 }
 
@@ -425,6 +466,7 @@ main {
   background-color: #616b6bd3;
   color: rgb(240, 240, 239);
   font-size: 1.2em;
+  font-family: 'Nunito', sans-serif;
 }
 
 .clear-filter-button {
@@ -441,6 +483,7 @@ main {
   background-color: #434747d3;
   color: rgb(240, 240, 239);
   font-size: 1.0em;
+  font-family: 'Nunito', sans-serif;
 }
 
 .available-rooms-display-area {
@@ -476,9 +519,13 @@ main {
 }
 
 .room-title {
-  font-size: 1.8em;
-  margin-top: 7px;
+  font-size: 1.6em;
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
   text-align: center;
+  font-family: 'Oswald', sans-serif;
+
 }
 
 .room-list {
@@ -488,9 +535,9 @@ main {
 .room-feature {
   display: block;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.3em;
   color: rgba(240, 240, 239, 0.868);
-
+  font-family: 'Nunito', sans-serif;
 }
 
 .room-select-button {
@@ -507,6 +554,7 @@ main {
   color: rgba(240, 240, 239, 0.88);
   font-size: 1.0em;
   margin-top: 20px;
+  font-family: 'Nunito', sans-serif;
 }
 
 
