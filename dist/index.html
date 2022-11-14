@@ -43,7 +43,10 @@
       <p class="booking-instructions">Check and see if we have any rooms available on the date you want. If we do, select the room card below and confirm your selection up here at the top.</p>
     </div>
     <form class="booking-input-form">
-      <input class="booking-input-field" type="date" id="bookingInput">
+      <div class="booking-input-block">
+        <input class="booking-input-field" type="date" id="bookingInput">
+        <label class="booking-field-label" for="bookingInput">enter the date you'd like to stay</label>
+      </div>
       <button type="button" class="check-availability-button">Check Availability</button>
     </form>
     <section class="booking-search-control-panel">
@@ -61,7 +64,7 @@
       </div>
       <div class="available-filter-area invisible">
         <h4 class="filter-title-text">Filter your results by room type</h4>
-        <select name="typeFilter" id="typeFilter">
+        <select name="typeFilter" id="typeFilter" aria-label="types-to-filter">
           <!-- here go list of types for filter --> 
         </select>
         <button type="button" class="available-filter-button">Filter</button>

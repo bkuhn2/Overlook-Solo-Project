@@ -199,7 +199,7 @@ function populateMyUpcomingBookings() {
   currentCustomer.bookings.sortBookingsByToday().futureBookings.forEach(booking => {
     myUpcomingBookingDisplay.innerHTML += `
       <section class="future-booking-record-display">
-        <p class="booking-record-title-text">Your Upcoming Trip on ${booking.date}</p>
+        <h6 class="booking-record-title-text">Your Upcoming Trip on ${booking.date}</h6>
         <ul>
           <li class="booking-record-list-item">room number ${booking.findRoom(allRooms.list).number}</li>
           <li class="booking-record-list-item">${booking.findRoom(allRooms.list).roomType}</li>
@@ -219,7 +219,7 @@ function populateMyPastBookings() {
   currentCustomer.bookings.sortBookingsByToday().pastBookings.forEach(booking => {
     myPastBookingDisplay.innerHTML += `
       <section class="past-booking-record-display">
-        <p class="booking-record-title-text">Your Trip on ${booking.date}</p>
+        <h6 class="booking-record-title-text">Your Trip on ${booking.date}</h6>
         <ul>
           <li class="booking-record-list-item">room number ${booking.findRoom(allRooms.list).number}</li>
           <li class="booking-record-list-item">${booking.findRoom(allRooms.list).roomType}</li>
@@ -332,7 +332,7 @@ function populateSearchResultsArea(roomList) {
     if (room.bidet) {
       availableRoomsDisplayArea.innerHTML += `
       <section class="available-room" id="${room.number}">
-        <p class="room-title">${roomTypeDisplay}</p>
+        <h5 class="room-title">${roomTypeDisplay}</h5>
         <ul class="room-list">
           <li class="room-feature">Room #${room.number}</li>
           <li class="room-feature">${room.numBeds} ${room.bedSize} bed(s)</li>
@@ -345,7 +345,7 @@ function populateSearchResultsArea(roomList) {
     } else {
       availableRoomsDisplayArea.innerHTML += `
       <section class="available-room" id="${room.number}">
-        <p class="room-title">${roomTypeDisplay}</p>
+        <h5 class="room-title">${roomTypeDisplay}</h5>
         <ul class="room-list">
           <li class="room-feature">Room #${room.number}</li>
           <li class="room-feature">${room.numBeds} ${room.bedSize} bed(s)</li>
