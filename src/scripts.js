@@ -36,7 +36,6 @@ const navBarHeading = document.querySelector('.nav-title-text');
 const navButtonViewBookings = document.querySelector('#navViewBookings');
 const navButtonBookRoom = document.querySelector('#navBookRoom');
 const navButtonBackHome = document.querySelector('#navBackHome');
-const navButtonAbout = document.querySelector('#navAbout');
 
 //// 🏡 Home Page //////
 const homePage = document.querySelector('.home-page');
@@ -66,9 +65,6 @@ const filterButton = document.querySelector('.available-filter-button');
 const clearFilterButton = document.querySelector('.clear-filter-button');
 const availableRoomsDisplayArea = document.querySelector('.available-rooms-display-area');
 const bookingSuccessText = document.querySelector('.booking-success-text')
-
-//// 🤨 About Page //////
-// const aboutPage TBD
 
 
 // INITIAL FETCH ON PAGE LOAD ----------------------------------------------->
@@ -115,20 +111,18 @@ bookButton.addEventListener('click', bookRoom)
 function loadMyDashboard() {
   hide(homePage);
   hide(bookingPage);
-  // hide(aboutPage);
   unHide(myBookingsPage);
+
   resetSearchResults();
   dateInput.value = '';
 
-  makeVisible(navButtonBackHome);
-  makeVisible(navButtonBookRoom);
-  makeVisible(navButtonAbout);
-  makeInvisible(navButtonViewBookings);
+  clickNavButton(navButtonViewBookings);
+  unClickNavButton(navButtonBackHome);
+  unClickNavButton(navButtonBookRoom);
 
   pageBody.classList.add('my-bookings-background');
   pageBody.classList.remove('home-background');
   pageBody.classList.remove('booking-background');
-  //remove about backround
 
   populateDashboard()
 }
@@ -136,43 +130,35 @@ function loadMyDashboard() {
 function loadBookingPage() {
   hide(homePage);
   hide(myBookingsPage);
-  // hide(aboutPage);
   unHide(bookingPage);
+
   resetSearchResults();
   dateInput.value = '';
 
-  makeVisible(navButtonViewBookings);
-  makeVisible(navButtonBackHome);
-  makeVisible(navButtonAbout);
-  makeInvisible(navButtonBookRoom);
+  clickNavButton(navButtonBookRoom);
+  unClickNavButton(navButtonBackHome);
+  unClickNavButton(navButtonViewBookings);
 
   pageBody.classList.remove('my-bookings-background');
   pageBody.classList.remove('home-background');
   pageBody.classList.add('booking-background');
-  //remove about backround
 }
 
 function loadHomePage() {
   hide(bookingPage);
   hide(myBookingsPage);
-  // hide(aboutPage);
   unHide(homePage)
+
   resetSearchResults();
   dateInput.value = '';
 
-  makeVisible(navButtonViewBookings);
-  makeVisible(navButtonBookRoom);
-  makeVisible(navButtonAbout);
-  makeInvisible(navButtonBackHome);
+  clickNavButton(navButtonBackHome);
+  unClickNavButton(navButtonBookRoom);
+  unClickNavButton(navButtonViewBookings);
 
   pageBody.classList.remove('my-bookings-background');
   pageBody.classList.add('home-background');
   pageBody.classList.remove('booking-background');
-  //remove about backround
-}
-
-function loadAboutPage() {
-//tbd
 }
 
 
@@ -183,7 +169,6 @@ function populateDashboard() {
   populateMoneySpent();
   populateMyUpcomingBookings();
   populateMyPastBookings();
-  //idea for refactoring later - make the upcoming/past headings clickable, which unhides the display cards?
 }
 
 function populateMoneySpent() {
@@ -455,4 +440,12 @@ function makeInvisible(element) {
 
 function makeVisible(element) {
   element.classList.remove('invisible');
+}
+
+function clickNavButton(element) {
+  element.classList.add('clicked')
+}
+
+function unClickNavButton(element) {
+  element.classList.remove('clicked')
 }

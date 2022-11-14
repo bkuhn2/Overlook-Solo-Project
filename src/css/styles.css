@@ -49,16 +49,22 @@ main {
 }
 
 .nav-button {
-  background: #000000a5;
+  background: #00000089;
   width: 276px;
   height: 69px;
   border-radius: 6px;
-  border-width: 5px;
-  border-style: double;
-  border-color: #b3acacac;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #dbd6d6a5;
   border-image: none;
   color: #eae9e3d9;
   font-size: 1.3em;
+}
+
+.clicked {
+  background-color: rgba(10, 86, 93, 0.442);
+  color: #bbf7f0ab;
+  border-color: #80aba5a7;
 }
 
 /* HOME PAGE ----------------------------------------------------*/
