@@ -25,7 +25,7 @@
           <button class="login-button" type="button">LOGIN</button>
         </div>
       </section>
-      <p class="login-error-text hide">Invalid FILL IN HERE</p>
+      <p class="login-error-text"></p>
     </div>
   </main>
   <nav class="nav-bar hide">
@@ -33,17 +33,9 @@
     <div class="nav-button-area">
       <button type="button" class="nav-button" id="navViewBookings">View My Booking Dashboard</button>
       <button type="button" class="nav-button" id="navBookRoom">Book a Room</button>
-      <button type="button" class="nav-button clicked" id="navBackHome">Home</button>
+      <button type="button" class="nav-button clicked" id="navAbout">About this App</button>
     </div>
   </nav>
-  <main class="home-page hide">
-    <h1 class="main-heading-text">The Overlook Hotel</h1>
-    <p class="home-welcome-text">This app simulates a hotel website that lets customers view their past and
-      upcoming trips, how much they've spent so far at the hotel, and also book rooms in the future. It was created by Brett Kuhn,
-      a student at Turing School of Software and Design in Mod 2 of November 2022 - get started by using
-      the navigation bar to the left.</p>
-    <a href="https://github.com/bkuhn2" class="github-link-text"> 🔗 github.com/bkuhn2</a>
-  </main>
   <main class="my-bookings hide">
     <h1 class="main-heading-text">The Overlook Hotel</h1>
     <h2 class="my-bookings-heading-text">My Bookings</h2>
@@ -96,6 +88,14 @@
     <section class="available-rooms-display-area">
       <!-- here go available rooms or filtered rooms --> 
     </section>
+  </main>
+  <main class="about-page hide">
+    <h1 class="main-heading-text">The Overlook Hotel</h1>
+    <p class="about-text">This app simulates a hotel website that lets customers view their past and
+      upcoming trips, how much they've spent so far at the hotel, and also book rooms in the future. It was created by Brett Kuhn,
+      a student at Turing School of Software and Design in Mod 2 of November 2022 - get started by using
+      the navigation bar to the left.</p>
+    <a href="https://github.com/bkuhn2" class="github-link-text"> 🔗 github.com/bkuhn2</a>
   </main>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
