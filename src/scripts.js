@@ -73,10 +73,11 @@ const bookingSuccessText = document.querySelector('.booking-success-text')
 
 // INITIAL FETCH ON PAGE LOAD ----------------------------------------------->
 
-Promise.all([
+Promise.all([ //move this to other function w/ login concept
   retrieveData('http://localhost:3001/api/v1/customers'), 
   retrieveData('http://localhost:3001/api/v1/rooms'), 
-  retrieveData('http://localhost:3001/api/v1/bookings')]).then(data => {
+  retrieveData('http://localhost:3001/api/v1/bookings')])
+    .then(data => {
 
     currentCustomer = new Customer(data[0].customers[20], data[2].bookings) // will need to be based on login iteration eventually
     allBookings = new BookingRepo(data[2].bookings);
@@ -86,6 +87,10 @@ Promise.all([
 
     populateDashboard()
   })
+    .catch(error => {
+      console.log('in catch: ', error);
+      //make this something you see on the DOM - but need to figure out login page first..
+    })
 
 
 // EVENT LISTENERS ---------------------------------------------------------->
