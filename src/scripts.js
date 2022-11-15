@@ -6,8 +6,7 @@ import Booking from './classes/Booking';
 import BookingRepo from './classes/BookingRepo';
 import RoomRepo from './classes/RoomRepo';
 import acceptedUserNames from './usernames';
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+import './images/turing-logo.png';
 
 
 
@@ -29,14 +28,14 @@ const temporaryPassword = 'overlook2021';
 const pageBody = document.querySelector('#body');
 
 //// 🔑 Log-In Page //////
-const loginPage = document.querySelector('.login-page')
+const loginPage = document.querySelector('.login-page');
 const userNameInput = document.querySelector('#userNameInput');
 const passwordInput = document.querySelector('#passwordInput');
 const loginButton = document.querySelector('.login-button');
 const loginErrorText = document.querySelector('.login-error-text');
 
 //// 🗺 Nav Bar //////
-const navBar = document.querySelector('.nav-bar')
+const navBar = document.querySelector('.nav-bar');
 const navBarHeading = document.querySelector('.nav-title-text');
 const navButtonViewBookings = document.querySelector('#navViewBookings');
 const navButtonBookRoom = document.querySelector('#navBookRoom');
@@ -90,14 +89,14 @@ navButtonAbout.addEventListener('click', loadAboutPage);
 checkAvailabilityButton.addEventListener('click', displaySearchResults);
 filterButton.addEventListener('click', displayFilteredResults);
 clearFilterButton.addEventListener('click', clearFilteredResults);
-availableRoomsDisplayArea.addEventListener('click', showBookingConfirmArea)
-bookButton.addEventListener('click', bookRoom)
+availableRoomsDisplayArea.addEventListener('click', showBookingConfirmArea);
+bookButton.addEventListener('click', bookRoom);
 
 
 // FUNCTIONS ---------------------------------------------------------------->
 
 //////////////////////
-/// 🗺 Login Page ////
+/// 🔑 Login Page ////
 //////////////////////
 
 function checkLogInCreds(){
@@ -160,7 +159,7 @@ function populateAppData() {
 function loadSpecificPage(loadPage, hidePage1, hidePage2) {
   hide(hidePage1);
   hide(hidePage2);
-  unHide(loadPage)
+  unHide(loadPage);
 }
 
 function clickSpecificButton(clickButton, unClickButton1, unClickButton2) {
@@ -245,7 +244,7 @@ function reformatInput(inputValue) {
 }
 
 function checkInputFuture(inputValue) {
-  const inputNums = inputValue.split('-').map(num => +num)
+  const inputNums = inputValue.split('-').map(num => +num);
   const todaysDate = new Date();
   const thisYear = todaysDate.getFullYear();
   const thisMonth = todaysDate.getMonth() + 1;
@@ -264,8 +263,8 @@ function checkInputFuture(inputValue) {
 
 function checkInputValid(inputValue) {
   const inputNums = inputValue.split('-').map(num => +num);
-  const months31 = [1, 3, 5, 7, 8, 10, 12]
-  const months30 = [4, 6, 9, 11]
+  const months31 = [1, 3, 5, 7, 8, 10, 12];
+  const months30 = [4, 6, 9, 11];
 
   if (inputValue === '') {
     unHide(bookingErrorTextInvalidDate);
@@ -302,7 +301,7 @@ function makeFilterTypes(searchResults) {
   const listOfTypes = [];
   searchResults.forEach(room => {
     if (!listOfTypes.includes(room.roomType)) {
-      listOfTypes.push(room.roomType)
+      listOfTypes.push(room.roomType);
     }
   });
   listOfTypes.forEach(type => {
