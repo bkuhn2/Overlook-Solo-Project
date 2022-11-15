@@ -80,7 +80,6 @@ main {
   text-shadow: 2px 4px 7px #000000;
   font-size: 1.4em;
   font-family: 'Nunito', sans-serif;
-
 }
 
 .login-button {
@@ -105,7 +104,6 @@ main {
   margin-right: 10px;
   font-size: 1.5em;
   font-family: 'Noto Sans Mende Kikakui', sans-serif;
-
 }
 
 
@@ -151,7 +149,6 @@ main {
   color: #eae9e3d9;
   font-size: 1.3em;
   font-family: 'Nunito', sans-serif;
-
 }
 
 .clicked {
@@ -179,7 +176,6 @@ main {
   margin-top: -18px;
   text-shadow: 4px 5px 18px #000000ad;
   font-family: 'Nunito', sans-serif;
-
 }
 
 .github-link-text {
@@ -569,7 +565,6 @@ main {
   border-width: 4px;
   display: flex;
   justify-content: center;
-
 }
 
 .available-room {
@@ -596,7 +591,6 @@ main {
   margin-bottom: 15px;
   text-align: center;
   font-family: 'Oswald', sans-serif;
-
 }
 
 .room-list {
@@ -659,7 +653,6 @@ main {
 .hide {
   display: none;
   transition: 0s linear 0.5s, opacity 300ms;
-  /* look into smoother transitions*/
 }
 
 .invisible {
