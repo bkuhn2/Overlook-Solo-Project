@@ -346,11 +346,17 @@ function populateSearchResultsArea(roomList) {
 function displaySearchResults() {
   resetSearchResults();
   checkInputValid(dateInput.value);
-  if (checkInputValid(dateInput.value)) {
+  if (checkInputValid(dateInput.value) &&
+    allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings).length !== 0) 
+  {
     searchResults = new RoomRepo(allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings));
     makeFilterTypes(searchResults.list);
     makeVisible(filterArea);
     populateSearchResultsArea(searchResults.list);
+  } else if ( checkInputValid(dateInput.value) &&
+    allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings).length === 0) 
+  {
+    unHide(bookingErrorTextNoAvailable);
   }
 }
 
