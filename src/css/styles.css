@@ -124,7 +124,7 @@ main {
 }
 
 .nav-title-text {
-  padding: 9px;
+  padding: 30px;
   font-size: 3.1em;
   color: #d64b4bf6;
   text-align: center;
@@ -188,7 +188,6 @@ main {
 .github-link-text {
   display: block;
   text-align: right;
-  width: 1090px;
   font-size: 1.8em;
   color: #7cecece7;
   font-style: normal;
@@ -198,7 +197,6 @@ main {
   text-shadow: 4px 5px 18px #000000ad;
   text-decoration: none;
   font-family: 'Oswald', sans-serif;
-
 }
 
 /* MY BOOKINGS PAGE ---------------------------------------------*/
@@ -210,8 +208,6 @@ main {
 
 .my-bookings-heading-text {
   text-align: center;
-  /* border-style: solid;
-  border-color: #f1f1f1a9; */
   font-size: 3.5em;
   color: #f4c134d9;
   margin: auto;
@@ -476,7 +472,6 @@ main {
   color: rgb(240, 240, 239);
   font-size: 1.2em;
   font-family: 'Oswald', sans-serif;
-
 }
 
 .notification-area {
@@ -636,11 +631,37 @@ main {
   font-family: 'Nunito', sans-serif;
 }
 
+/* ERROR PAGE CLASSES -------------------------------------------*/
+.error-page-text {
+  font-size: 3em;
+  color: rgb(255 255 255);
+  text-align: center;
+  margin-top: 200px;
+  text-shadow: 6px 5px 11px #000000;
+  font-family: 'Trade Winds', cursive;
+  padding: 200px;
+}
+
+.error-page-background {
+  background-image: linear-gradient(10deg, rgba(0, 0, 0, 0.39) 19%, rgba(0, 0, 0, 0.49) 83%), url(/src/images/maze.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.ok-button {
+  display: block;
+  margin: auto;
+  height: 93px;
+  width: 90px;
+  border-radius: 461px;
+  font-size: 2em;
+}
+
 
 /* HELPER CLASSES -----------------------------------------------*/
 .hide {
   display: none;
-  transition: 0s linear 0s, opacity 300ms;
+  transition: 0s linear 0.5s, opacity 300ms;
   /* look into smoother transitions*/
 }
 

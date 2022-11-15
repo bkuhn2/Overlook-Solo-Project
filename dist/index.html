@@ -15,11 +15,11 @@
       <section class="login-area">
         <div class="login-field-area">
           <div class="login-field">
-            <input class="login-input" id="userNameInput" type="text">
+            <input class="login-input" id="userNameInput" type="text" autocomplete="off">
               <label class="login-label" for="userNameInput">username</label>
           </div>
           <div class="login-field">
-            <input class="login-input" id="passwordInput" type="text">
+            <input class="login-input" id="passwordInput" type="text" autocomplete="off">
               <label class="login-label" for="passwordInput">password</label>
           </div>
           <button class="login-button" type="button">LOGIN</button>
@@ -96,6 +96,10 @@
       a student at Turing School of Software and Design in Mod 2 of November 2022 - get started by using
       the navigation bar to the left.</p>
     <a href="https://github.com/bkuhn2" class="github-link-text"> 🔗 github.com/bkuhn2</a>
+  </main>
+  <main class="error-loading-page hide">
+    <h1 class="error-page-text">Oh no. Something went wrong getting the page data. Please contact the site administrator to fix this.</h1>
+    <button class="ok-button" onClick="window.location.reload()">ok</button>
   </main>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>

@@ -1,21 +1,17 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
+// IMPORTS ----------------------------------------------------------------->
 import './css/styles.css';
-
 import retrieveData from './apiCalls';
 import Customer from './classes/Customer';
 import Booking from './classes/Booking';
 import BookingRepo from './classes/BookingRepo';
 import RoomRepo from './classes/RoomRepo';
 import acceptedUserNames from './usernames';
-
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
 
-// VARIABLES ---------------------------------------------------------------->
 
+// VARIABLES ---------------------------------------------------------------->
 let currentCustomer;
 let allBookings;
 let allRooms;
@@ -24,7 +20,6 @@ let selectedRoom;
 let searchResults;
 let filteredSearchResults;
 const temporaryPassword = 'overlook2021';
-
 
 
 
@@ -76,27 +71,9 @@ const clearFilterButton = document.querySelector('.clear-filter-button');
 const availableRoomsDisplayArea = document.querySelector('.available-rooms-display-area');
 const bookingSuccessText = document.querySelector('.booking-success-text');
 
+//// 💩 Error Page //////
+const errorRetrievingDataPage = document.querySelector('.error-loading-page');
 
-// INITIAL FETCH ON PAGE LOAD ----------------------------------------------->
-
-Promise.all([ //move this to other function w/ login concept
-  retrieveData('http://localhost:3001/api/v1/customers'), 
-  retrieveData('http://localhost:3001/api/v1/rooms'), 
-  retrieveData('http://localhost:3001/api/v1/bookings')])
-    .then(data => {
-
-    currentCustomer = new Customer(data[0].customers[20], data[2].bookings) // will need to be based on login iteration eventually
-    allBookings = new BookingRepo(data[2].bookings);
-    allRooms = new RoomRepo(data[1].rooms);
-
-    navBarHeading.innerText = `Welcome back, ${currentCustomer.name}!`
-
-    populateDashboard()
-  })
-    .catch(error => {
-      console.log('in catch: ', error);
-      //make this something you see on the DOM - but need to figure out login page first..
-    })
 
 
 // EVENT LISTENERS ---------------------------------------------------------->
@@ -118,9 +95,11 @@ bookButton.addEventListener('click', bookRoom)
 
 
 // FUNCTIONS ---------------------------------------------------------------->
+
 //////////////////////
 /// 🗺 Login Page ////
 //////////////////////
+
 function checkLogInCreds(){
   if (acceptedUserNames.includes(userNameInput.value) &&
       passwordInput.value === temporaryPassword) {
@@ -144,8 +123,7 @@ function loadApp() {
   if (checkLogInCreds()) {
     hide(loginPage);
     unHide(navBar);
-    loadMyDashboard()
-    populateAppData()
+    populateAppData();
   }
 
 }
@@ -160,18 +138,24 @@ function populateAppData() {
         allBookings = new BookingRepo(data[2].bookings);
         allRooms = new RoomRepo(data[1].rooms);
         navBarHeading.innerText = `Welcome Back, ${currentCustomer.name}!`
-        populateDashboard()
+        loadMyDashboard();
       })
       .catch(error => {
-        console.log('in catch: ', error);
+        console.log(error);
+        hide(aboutPage);
+        hide(bookingPage);
+        hide(myBookingsPage);
+        hide(navBar);
+        pageBody.classList.add('error-page-background');
+        pageBody.classList.remove('login-background');
+        unHide(errorRetrievingDataPage);
       })
 }
-
-
 
 //////////////////////
 //// 🗺 Nav Bar //////
 //////////////////////
+
 function loadMyDashboard() {
   hide(aboutPage);
   hide(bookingPage);
@@ -211,7 +195,7 @@ function loadBookingPage() {
 function loadAboutPage() {
   hide(bookingPage);
   hide(myBookingsPage);
-  unHide(aboutPage)
+  unHide(aboutPage);
 
   resetSearchResults();
   dateInput.value = '';
@@ -225,10 +209,10 @@ function loadAboutPage() {
   pageBody.classList.remove('booking-background');
 }
 
-
 /////////////////////////////
 //// 🤡 Dashboard Page //////
 /////////////////////////////
+
 function populateDashboard() {
   populateMoneySpent();
   populateMyUpcomingBookings();
@@ -257,7 +241,7 @@ function populateMyUpcomingBookings() {
         </ul>
       </section>
     `;
-  })
+  });
 }
 
 function populateMyPastBookings() {
@@ -283,6 +267,7 @@ function populateMyPastBookings() {
 ///////////////////////////
 //// 📖 Booking Page //////
 ///////////////////////////
+
 function reformatInput(inputValue) {
   return inputValue.split('-').join('/');
 }
@@ -357,7 +342,7 @@ function makeFilterTypes(searchResults) {
   listOfTypes.forEach(type => {
     filterDropDown.innerHTML += `
     <option value="${type}">${type}</option>
-    `
+    `;
   });
 }
 
@@ -438,7 +423,7 @@ function clearFilteredResults() {
 
 function showBookingConfirmArea(event) {
   if (event.target.className === 'room-select-button') {
-    const dateComponents = requestedDate.split('/')
+    const dateComponents = requestedDate.split('/');
     const displayDate = `${+dateComponents[1]}/${+dateComponents[2]}/${+dateComponents[0]}`;
     makeVisible(bookingConfirmArea);
     selectedRoom = allRooms.list.find(room => room.number === +event.target.parentElement.id);
@@ -463,7 +448,7 @@ function postNewBooking() {
     if (response.ok) {
       return response.json()
     } else {
-      throw new Error('Response not OK - look at issue in body')
+      throw new Error('Response not OK - look at issue in body');
     }
   })
     .then(data => {
@@ -486,12 +471,13 @@ function updateBookings(rawBooking) {
 /////////////////////
 //// 🤓 Helper //////
 /////////////////////
+
 function hide(element) {
   element.classList.add('hide');
 }
 
 function hideSuccessText() {
-  bookingSuccessText.classList.add('hide')
+  bookingSuccessText.classList.add('hide');
 }
 
 function unHide(element) {
@@ -507,13 +493,13 @@ function makeVisible(element) {
 }
 
 function clickNavButton(element) {
-  element.classList.add('clicked')
+  element.classList.add('clicked');
 }
 
 function unClickNavButton(element) {
-  element.classList.remove('clicked')
+  element.classList.remove('clicked');
 }
 
 function resetLogInErrorText() {
-  loginErrorText.innerText = ''
+  loginErrorText.innerText = '';
 }
