@@ -166,7 +166,7 @@ main {
 
 /* ABOUT PAGE ----------------------------------------------------*/
 .about-background {
-  background-image: linear-gradient(10deg, rgb(30 30 30 / 72%) 19%, rgb(22 22 22 / 89%) 83%), url(/src/images/lobby-image.jpg);
+  background-image: linear-gradient(10deg, rgb(7 7 7 / 65%) 19%, rgb(8 8 8 / 84%) 83%), url(/src/images/lobby-image.jpg);
   background-size: cover;
   background-attachment: fixed;
 }

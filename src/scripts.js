@@ -122,6 +122,7 @@ function getUserID() {
 function loadApp() {
   if (checkLogInCreds()) {
     hide(loginPage);
+    pageBody.classList.remove('login-background');
     unHide(navBar);
     populateAppData();
   }
