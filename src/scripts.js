@@ -1,20 +1,17 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
+// IMPORTS ----------------------------------------------------------------->
 import './css/styles.css';
-
 import retrieveData from './apiCalls';
 import Customer from './classes/Customer';
 import Booking from './classes/Booking';
 import BookingRepo from './classes/BookingRepo';
 import RoomRepo from './classes/RoomRepo';
-
+import acceptedUserNames from './usernames';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
 
-// VARIABLES ---------------------------------------------------------------->
 
+// VARIABLES ---------------------------------------------------------------->
 let currentCustomer;
 let allBookings;
 let allRooms;
@@ -22,6 +19,7 @@ let requestedDate;
 let selectedRoom;
 let searchResults;
 let filteredSearchResults;
+const temporaryPassword = 'overlook2021';
 
 
 
@@ -30,14 +28,22 @@ let filteredSearchResults;
 //// 🌎 Body //////
 const pageBody = document.querySelector('#body');
 
+//// 🔑 Log-In Page //////
+const loginPage = document.querySelector('.login-page')
+const userNameInput = document.querySelector('#userNameInput');
+const passwordInput = document.querySelector('#passwordInput');
+const loginButton = document.querySelector('.login-button');
+const loginErrorText = document.querySelector('.login-error-text');
+
 //// 🗺 Nav Bar //////
+const navBar = document.querySelector('.nav-bar')
 const navBarHeading = document.querySelector('.nav-title-text');
 const navButtonViewBookings = document.querySelector('#navViewBookings');
 const navButtonBookRoom = document.querySelector('#navBookRoom');
-const navButtonBackHome = document.querySelector('#navBackHome');
+const navButtonAbout = document.querySelector('#navAbout');
 
-//// 🏡 Home Page //////
-const homePage = document.querySelector('.home-page');
+//// 🏡 About Page //////
+const aboutPage = document.querySelector('.about-page');
 
 //// 🤡 Dashboard Page //////
 const myBookingsPage = document.querySelector('.my-bookings');
@@ -65,35 +71,20 @@ const clearFilterButton = document.querySelector('.clear-filter-button');
 const availableRoomsDisplayArea = document.querySelector('.available-rooms-display-area');
 const bookingSuccessText = document.querySelector('.booking-success-text');
 
+//// 💩 Error Page //////
+const errorRetrievingDataPage = document.querySelector('.error-loading-page');
 
-// INITIAL FETCH ON PAGE LOAD ----------------------------------------------->
-
-Promise.all([ //move this to other function w/ login concept
-  retrieveData('http://localhost:3001/api/v1/customers'), 
-  retrieveData('http://localhost:3001/api/v1/rooms'), 
-  retrieveData('http://localhost:3001/api/v1/bookings')])
-    .then(data => {
-
-    currentCustomer = new Customer(data[0].customers[20], data[2].bookings) // will need to be based on login iteration eventually
-    allBookings = new BookingRepo(data[2].bookings);
-    allRooms = new RoomRepo(data[1].rooms);
-
-    navBarHeading.innerText = `Welcome back, ${currentCustomer.name}!`
-
-    populateDashboard()
-  })
-    .catch(error => {
-      console.log('in catch: ', error);
-      //make this something you see on the DOM - but need to figure out login page first..
-    })
 
 
 // EVENT LISTENERS ---------------------------------------------------------->
 
+//// 🔑 Log-In Page //////
+loginButton.addEventListener('click', loadApp);
+
 //// 🗺 Nav Bar //////
 navButtonViewBookings.addEventListener('click', loadMyDashboard);
 navButtonBookRoom.addEventListener('click', loadBookingPage);
-navButtonBackHome.addEventListener('click', loadHomePage);
+navButtonAbout.addEventListener('click', loadAboutPage);
 
 //// 📖 Booking Page //////
 checkAvailabilityButton.addEventListener('click', displaySearchResults);
@@ -104,11 +95,70 @@ bookButton.addEventListener('click', bookRoom)
 
 
 // FUNCTIONS ---------------------------------------------------------------->
+
+//////////////////////
+/// 🗺 Login Page ////
+//////////////////////
+
+function checkLogInCreds(){
+  if (acceptedUserNames.includes(userNameInput.value) &&
+      passwordInput.value === temporaryPassword) {
+        return true;
+  } else if (!acceptedUserNames.includes(userNameInput.value)) {
+    loginErrorText.innerText = 'Username not found. Check for spelling and capitalization and try again.';
+    setTimeout(resetLogInErrorText, 5000);
+    return false;
+  } else if (passwordInput.value !== temporaryPassword) {
+    loginErrorText.innerText = 'Incorrect password. Check for spelling and capitalization and try again.';
+    setTimeout(resetLogInErrorText, 5000);
+    return false;
+  }
+}
+
+function getUserID() {
+  return userNameInput.value.split('customer')[1]
+}
+
+function loadApp() {
+  if (checkLogInCreds()) {
+    hide(loginPage);
+    pageBody.classList.remove('login-background');
+    unHide(navBar);
+    populateAppData();
+  }
+
+}
+
+function populateAppData() {
+  Promise.all([
+    retrieveData(`http://localhost:3001/api/v1/customers/${getUserID()}`), 
+    retrieveData('http://localhost:3001/api/v1/rooms'), 
+    retrieveData('http://localhost:3001/api/v1/bookings')])
+      .then(data => {
+        currentCustomer = new Customer(data[0], data[2].bookings);
+        allBookings = new BookingRepo(data[2].bookings);
+        allRooms = new RoomRepo(data[1].rooms);
+        navBarHeading.innerText = `Welcome Back, ${currentCustomer.name}!`
+        loadMyDashboard();
+      })
+      .catch(error => {
+        console.log(error);
+        hide(aboutPage);
+        hide(bookingPage);
+        hide(myBookingsPage);
+        hide(navBar);
+        pageBody.classList.add('error-page-background');
+        pageBody.classList.remove('login-background');
+        unHide(errorRetrievingDataPage);
+      })
+}
+
 //////////////////////
 //// 🗺 Nav Bar //////
 //////////////////////
+
 function loadMyDashboard() {
-  hide(homePage);
+  hide(aboutPage);
   hide(bookingPage);
   unHide(myBookingsPage);
 
@@ -116,18 +166,18 @@ function loadMyDashboard() {
   dateInput.value = '';
 
   clickNavButton(navButtonViewBookings);
-  unClickNavButton(navButtonBackHome);
+  unClickNavButton(navButtonAbout);
   unClickNavButton(navButtonBookRoom);
 
   pageBody.classList.add('my-bookings-background');
-  pageBody.classList.remove('home-background');
+  pageBody.classList.remove('about-background');
   pageBody.classList.remove('booking-background');
 
   populateDashboard()
 }
 
 function loadBookingPage() {
-  hide(homePage);
+  hide(aboutPage);
   hide(myBookingsPage);
   unHide(bookingPage);
 
@@ -135,35 +185,35 @@ function loadBookingPage() {
   dateInput.value = '';
 
   clickNavButton(navButtonBookRoom);
-  unClickNavButton(navButtonBackHome);
+  unClickNavButton(navButtonAbout);
   unClickNavButton(navButtonViewBookings);
 
   pageBody.classList.remove('my-bookings-background');
-  pageBody.classList.remove('home-background');
+  pageBody.classList.remove('about-background');
   pageBody.classList.add('booking-background');
 }
 
-function loadHomePage() {
+function loadAboutPage() {
   hide(bookingPage);
   hide(myBookingsPage);
-  unHide(homePage)
+  unHide(aboutPage);
 
   resetSearchResults();
   dateInput.value = '';
 
-  clickNavButton(navButtonBackHome);
+  clickNavButton(navButtonAbout);
   unClickNavButton(navButtonBookRoom);
   unClickNavButton(navButtonViewBookings);
 
   pageBody.classList.remove('my-bookings-background');
-  pageBody.classList.add('home-background');
+  pageBody.classList.add('about-background');
   pageBody.classList.remove('booking-background');
 }
-
 
 /////////////////////////////
 //// 🤡 Dashboard Page //////
 /////////////////////////////
+
 function populateDashboard() {
   populateMoneySpent();
   populateMyUpcomingBookings();
@@ -192,7 +242,7 @@ function populateMyUpcomingBookings() {
         </ul>
       </section>
     `;
-  })
+  });
 }
 
 function populateMyPastBookings() {
@@ -218,6 +268,7 @@ function populateMyPastBookings() {
 ///////////////////////////
 //// 📖 Booking Page //////
 ///////////////////////////
+
 function reformatInput(inputValue) {
   return inputValue.split('-').join('/');
 }
@@ -292,7 +343,7 @@ function makeFilterTypes(searchResults) {
   listOfTypes.forEach(type => {
     filterDropDown.innerHTML += `
     <option value="${type}">${type}</option>
-    `
+    `;
   });
 }
 
@@ -373,7 +424,7 @@ function clearFilteredResults() {
 
 function showBookingConfirmArea(event) {
   if (event.target.className === 'room-select-button') {
-    const dateComponents = requestedDate.split('/')
+    const dateComponents = requestedDate.split('/');
     const displayDate = `${+dateComponents[1]}/${+dateComponents[2]}/${+dateComponents[0]}`;
     makeVisible(bookingConfirmArea);
     selectedRoom = allRooms.list.find(room => room.number === +event.target.parentElement.id);
@@ -398,7 +449,7 @@ function postNewBooking() {
     if (response.ok) {
       return response.json()
     } else {
-      throw new Error('Response not OK - look at issue in body')
+      throw new Error('Response not OK - look at issue in body');
     }
   })
     .then(data => {
@@ -421,12 +472,13 @@ function updateBookings(rawBooking) {
 /////////////////////
 //// 🤓 Helper //////
 /////////////////////
+
 function hide(element) {
   element.classList.add('hide');
 }
 
 function hideSuccessText() {
-  bookingSuccessText.classList.add('hide')
+  bookingSuccessText.classList.add('hide');
 }
 
 function unHide(element) {
@@ -442,9 +494,13 @@ function makeVisible(element) {
 }
 
 function clickNavButton(element) {
-  element.classList.add('clicked')
+  element.classList.add('clicked');
 }
 
 function unClickNavButton(element) {
-  element.classList.remove('clicked')
+  element.classList.remove('clicked');
+}
+
+function resetLogInErrorText() {
+  loginErrorText.innerText = '';
 }
