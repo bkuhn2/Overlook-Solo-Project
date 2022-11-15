@@ -126,7 +126,6 @@ function loadApp() {
     unHide(navBar);
     populateAppData();
   }
-
 }
 
 function populateAppData() {
@@ -153,62 +152,54 @@ function populateAppData() {
       })
 }
 
+
 //////////////////////
 //// 🗺 Nav Bar //////
 //////////////////////
 
-function loadMyDashboard() {
-  hide(aboutPage);
-  hide(bookingPage);
-  unHide(myBookingsPage);
+function loadSpecificPage(loadPage, hidePage1, hidePage2) {
+  hide(hidePage1);
+  hide(hidePage2);
+  unHide(loadPage)
+}
 
+function clickSpecificButton(clickButton, unClickButton1, unClickButton2) {
+  clickNavButton(clickButton);
+  unClickNavButton(unClickButton1);
+  unClickNavButton(unClickButton2);
+}
+
+function loadSpecificBackground(addedClass, removedClass1, removedClass2) {
+  pageBody.classList.add(addedClass);
+  pageBody.classList.remove(removedClass1);
+  pageBody.classList.remove(removedClass2);
+}
+
+function loadMyDashboard() {
   resetSearchResults();
   dateInput.value = '';
-
-  clickNavButton(navButtonViewBookings);
-  unClickNavButton(navButtonAbout);
-  unClickNavButton(navButtonBookRoom);
-
-  pageBody.classList.add('my-bookings-background');
-  pageBody.classList.remove('about-background');
-  pageBody.classList.remove('booking-background');
-
-  populateDashboard()
+  loadSpecificPage(myBookingsPage, aboutPage, bookingPage);
+  clickSpecificButton(navButtonViewBookings, navButtonAbout, navButtonBookRoom);
+  loadSpecificBackground('my-bookings-background', 'about-background', 'booking-background');
+  populateDashboard();
 }
 
 function loadBookingPage() {
-  hide(aboutPage);
-  hide(myBookingsPage);
-  unHide(bookingPage);
-
   resetSearchResults();
   dateInput.value = '';
-
-  clickNavButton(navButtonBookRoom);
-  unClickNavButton(navButtonAbout);
-  unClickNavButton(navButtonViewBookings);
-
-  pageBody.classList.remove('my-bookings-background');
-  pageBody.classList.remove('about-background');
-  pageBody.classList.add('booking-background');
+  loadSpecificPage(bookingPage, aboutPage, myBookingsPage)
+  clickSpecificButton(navButtonBookRoom, navButtonAbout, navButtonViewBookings);
+  loadSpecificBackground('booking-background', 'my-bookings-background', 'about-background');
 }
 
 function loadAboutPage() {
-  hide(bookingPage);
-  hide(myBookingsPage);
-  unHide(aboutPage);
-
   resetSearchResults();
   dateInput.value = '';
-
-  clickNavButton(navButtonAbout);
-  unClickNavButton(navButtonBookRoom);
-  unClickNavButton(navButtonViewBookings);
-
-  pageBody.classList.remove('my-bookings-background');
-  pageBody.classList.add('about-background');
-  pageBody.classList.remove('booking-background');
+  loadSpecificPage(aboutPage, bookingPage, myBookingsPage);
+  clickSpecificButton(navButtonAbout, navButtonBookRoom, navButtonViewBookings);
+  loadSpecificBackground('about-background', 'my-bookings-background', 'booking-background');
 }
+
 
 /////////////////////////////
 //// 🤡 Dashboard Page //////
