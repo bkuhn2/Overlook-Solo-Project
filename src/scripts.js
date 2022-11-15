@@ -216,8 +216,8 @@ function loadAboutPage() {
 
 function populateDashboard() {
   populateMoneySpent();
-  populateMyUpcomingBookings();
-  populateMyPastBookings();
+  populateBookings(myUpcomingBookingTitle, myUpcomingBookingDisplay, "futureBookings", "Upcoming Bookings", "future-booking-record-display");
+  populateBookings(myPastBookingTitle, myPastBookingDisplay, "pastBookings", "Past Bookings", "past-booking-record-display");
 }
 
 function populateMoneySpent() {
@@ -225,15 +225,14 @@ function populateMoneySpent() {
   myBookingSpendText.innerText = `You have spent $${moneySpent} with us so far!`;
 }
 
-function populateMyUpcomingBookings() {
-  myUpcomingBookingTitle.innerText = `Upcoming Bookings: ${currentCustomer.bookings.sortBookingsByToday().futureBookings.length}`;
+function populateBookings (titleElement, displayElement, timeKey, title, className) {
+  titleElement.innerText = `${title}: ${currentCustomer.bookings.sortBookingsByToday()[timeKey].length}`;
+  displayElement.innerHTML = '';
 
-  myUpcomingBookingDisplay.innerHTML = '';
-
-  currentCustomer.bookings.sortBookingsByToday().futureBookings.forEach(booking => {
-    myUpcomingBookingDisplay.innerHTML += `
-      <section class="future-booking-record-display">
-        <h6 class="booking-record-title-text">Your Upcoming Trip on ${booking.date}</h6>
+  currentCustomer.bookings.sortBookingsByToday()[timeKey].forEach(booking => {
+    displayElement.innerHTML += `
+      <section class=${className}>
+        <h6 class="booking-record-title-text">Your Trip on ${booking.date}</h6>
         <ul>
           <li class="booking-record-list-item">room number ${booking.findRoom(allRooms.list).number}</li>
           <li class="booking-record-list-item">${booking.findRoom(allRooms.list).roomType}</li>
@@ -245,25 +244,6 @@ function populateMyUpcomingBookings() {
   });
 }
 
-function populateMyPastBookings() {
-  myPastBookingTitle.innerText = `Past Bookings: ${currentCustomer.bookings.sortBookingsByToday().pastBookings.length}`;
-
-  myPastBookingDisplay.innerHTML = '';
-
-  currentCustomer.bookings.sortBookingsByToday().pastBookings.forEach(booking => {
-    myPastBookingDisplay.innerHTML += `
-      <section class="past-booking-record-display">
-        <h6 class="booking-record-title-text">Your Trip on ${booking.date}</h6>
-        <ul>
-          <li class="booking-record-list-item">room number ${booking.findRoom(allRooms.list).number}</li>
-          <li class="booking-record-list-item">${booking.findRoom(allRooms.list).roomType}</li>
-          <li class="booking-record-list-item">${booking.findRoom(allRooms.list).numBeds} ${booking.findRoom(allRooms.list).bedSize} bed(s)</li>
-          <li class="booking-record-list-item">spent ${booking.findRoom(allRooms.list).costPerNight}</li>
-        </ul>
-      </section>
-    `;
-  })
-}
 
 ///////////////////////////
 //// 📖 Booking Page //////
@@ -358,21 +338,7 @@ function resetSearchResults() {
 function populateSearchResultsArea(roomList) {
   roomList.forEach(room => {
     const roomTypeDisplay = room.roomType.toUpperCase();
-    if (room.bidet) {
-      availableRoomsDisplayArea.innerHTML += `
-      <section class="available-room" id="${room.number}">
-        <h5 class="room-title">${roomTypeDisplay}</h5>
-        <ul class="room-list">
-          <li class="room-feature">Room #${room.number}</li>
-          <li class="room-feature">${room.numBeds} ${room.bedSize} bed(s)</li>
-          <li class="room-feature">Has a bidet</li>
-          <li class="room-feature">$${room.costPerNight} per night</li>
-        </ul>
-        <button class="room-select-button" type="button">Select This Room</button>
-      </section>
-      `;
-    } else {
-      availableRoomsDisplayArea.innerHTML += `
+    availableRoomsDisplayArea.innerHTML += `
       <section class="available-room" id="${room.number}">
         <h5 class="room-title">${roomTypeDisplay}</h5>
         <ul class="room-list">
@@ -382,8 +348,7 @@ function populateSearchResultsArea(roomList) {
         </ul>
         <button class="room-select-button" type="button">Select This Room</button>
       </section>
-      `;
-    }
+    `;
   });
 }
 
