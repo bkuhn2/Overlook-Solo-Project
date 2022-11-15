@@ -11,7 +11,7 @@ describe('Room Repo', function() {
 
   this.beforeEach('define variables for test', function() {
     roomRepo1 = new RoomRepo(sampleRoomsForRepo);
-    bookingRepoTest = new BookingRepo(sampleBookingsForRoomRepo)
+    bookingRepoTest = new BookingRepo(sampleBookingsForRoomRepo);
   })
 
   it('should be a function', function() {
@@ -20,7 +20,7 @@ describe('Room Repo', function() {
 
   it('should store an array of rooms', function() {
     expect(roomRepo1.list).to.be.a('array');
-    expect(roomRepo1.list).to.deep.equal(sampleRoomsForRepo)
+    expect(roomRepo1.list).to.deep.equal(sampleRoomsForRepo);
   });
 
   it('should filter its rooms by type', function() {

@@ -50,13 +50,9 @@ describe('Booking', function() {
     expect(bookingInstance4.roomNumber).to.equal(undefined);
   });
 
-  it('should know who how much it cost the customer', function() {
+  it('should know how much it costs the customer', function() {
     expect(bookingInstance1.findCost(sampleRooms)).to.equal(294.56);
     expect(bookingInstance2.findCost(sampleRooms)).to.equal(172.09);
-  });
-
-  it('should let the customer know if they can\'t find the room to get the cost', function() {
-    expect(bookingInstance3.findCost(sampleRooms)).to.equal('Could not find the room in our system, please check again to make sure number is correct');
   });
 
   it('should let the customer know if they can\'t find the room to get the cost', function() {
