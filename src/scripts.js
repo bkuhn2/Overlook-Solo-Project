@@ -142,17 +142,32 @@ function getUserID() {
 
 function loadApp() {
   if (checkLogInCreds()) {
-
     hide(loginPage);
     unHide(navBar);
     loadMyDashboard()
-
-    //fetch
-
+    populateAppData()
   }
 
-
 }
+
+function populateAppData() {
+  Promise.all([
+    retrieveData(`http://localhost:3001/api/v1/customers/${getUserID()}`), 
+    retrieveData('http://localhost:3001/api/v1/rooms'), 
+    retrieveData('http://localhost:3001/api/v1/bookings')])
+      .then(data => {
+        currentCustomer = new Customer(data[0], data[2].bookings);
+        allBookings = new BookingRepo(data[2].bookings);
+        allRooms = new RoomRepo(data[1].rooms);
+        navBarHeading.innerText = `Welcome Back, ${currentCustomer.name}!`
+        populateDashboard()
+      })
+      .catch(error => {
+        console.log('in catch: ', error);
+      })
+}
+
+
 
 //////////////////////
 //// 🗺 Nav Bar //////
