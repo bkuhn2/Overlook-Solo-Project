@@ -34,25 +34,22 @@ describe('Booking Repo', function() {
   it('should find its past bookings', function() {
     expect(bookingRepo1.sortBookingsByToday().pastBookings.length).to.equal(4)
     expect(bookingRepo2.sortBookingsByToday().pastBookings.length).to.equal(3)
-
     expect(bookingRepo1.sortBookingsByToday().pastBookings).to.deep.equal(pastBookings1)
   });
 
   it('should find its future bookings', function() {
     expect(bookingRepo1.sortBookingsByToday().futureBookings.length).to.equal(3)
     expect(bookingRepo2.sortBookingsByToday().futureBookings.length).to.equal(0)
-
     expect(bookingRepo1.sortBookingsByToday().futureBookings).to.deep.equal(futureBookings1)
   });
 
   it('should let you know if a date is not formatted correctly', function() {
-    
     const bookingRepo3 = new BookingRepo([{
       id: "5fwrgu4i7k55hl78f",
       userID: 4,
       date: "2022/2/03",
       roomNumber: 14
-      }])
+      }]);
     
     expect(bookingRepo3.sortBookingsByToday()).to.equal('Please check the source data to make sure the date is writted in YYYY/MM/DD form.')
   });

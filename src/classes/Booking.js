@@ -1,6 +1,6 @@
 
 class Booking {
-  constructor(rawBooking) { //<-----takes individual booking object from fetch
+  constructor(rawBooking) {
     this.id = rawBooking.id;
     this.userID = rawBooking.userID;
     this.date = rawBooking.date;
@@ -14,13 +14,10 @@ class Booking {
       return 'Could not find the room in our system, please check again to make sure number is correct';
     }
   }
-  //returns a number, money
 
   findRoom(allRooms) {
     return allRooms.find(room => room.number === this.roomNumber);
   }
-  //returns a room object
-
 }
 
 export default Booking;

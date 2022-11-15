@@ -1,10 +1,9 @@
 import Booking from "./Booking";
 
 class BookingRepo {
-  constructor(bookings) { //<------takes array raw data, or filtered raw data from fetch
+  constructor(bookings) {
     this.list = bookings.map(booking => new Booking(booking));
   }
-  //returns an array
 
   sortBookingsByToday() {
     const sortedBookings = {
@@ -23,15 +22,11 @@ class BookingRepo {
 
       if (dateNumJoined.length !== 8){
         badFormatting.push(booking)
-      } else if (dateNums[0] < thisYear) {
-        sortedBookings.pastBookings.push(booking);
-      } else if (dateNums[0] > thisYear) {
-        sortedBookings.futureBookings.push(booking);
-      } else if (dateNums[1] < thisMonth) {
-        sortedBookings.pastBookings.push(booking);
-      } else if (dateNums[1] > thisMonth) {
-        sortedBookings.futureBookings.push(booking);
-      } else if (dateNums[2] < thisDay) {
+      } else if (
+        (dateNums[0] < thisYear) ||
+        (dateNums[0] === thisYear && dateNums[1] < thisMonth) ||
+        (dateNums[0] === thisYear && dateNums[1] === thisMonth && dateNums[2] < thisDay)
+        ) {
         sortedBookings.pastBookings.push(booking);
       } else {
         sortedBookings.futureBookings.push(booking);
@@ -45,7 +40,6 @@ class BookingRepo {
     }
 
   }
-  // returns an array
 }
 
 export default BookingRepo;

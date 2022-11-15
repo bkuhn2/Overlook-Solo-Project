@@ -1,6 +1,6 @@
 // IMPORTS ----------------------------------------------------------------->
 import './css/styles.css';
-import retrieveData from './apiCalls';
+import {retrieveData, sendBookingData} from './apiCalls';
 import Customer from './classes/Customer';
 import Booking from './classes/Booking';
 import BookingRepo from './classes/BookingRepo';
@@ -103,7 +103,7 @@ bookButton.addEventListener('click', bookRoom)
 function checkLogInCreds(){
   if (acceptedUserNames.includes(userNameInput.value) &&
       passwordInput.value === temporaryPassword) {
-        return true;
+    return true;
   } else if (!acceptedUserNames.includes(userNameInput.value)) {
     loginErrorText.innerText = 'Username not found. Check for spelling and capitalization and try again.';
     setTimeout(resetLogInErrorText, 5000);
@@ -116,7 +116,7 @@ function checkLogInCreds(){
 }
 
 function getUserID() {
-  return userNameInput.value.split('customer')[1]
+  return userNameInput.value.split('customer')[1];
 }
 
 function loadApp() {
@@ -126,7 +126,6 @@ function loadApp() {
     unHide(navBar);
     populateAppData();
   }
-
 }
 
 function populateAppData() {
@@ -138,7 +137,7 @@ function populateAppData() {
         currentCustomer = new Customer(data[0], data[2].bookings);
         allBookings = new BookingRepo(data[2].bookings);
         allRooms = new RoomRepo(data[1].rooms);
-        navBarHeading.innerText = `Welcome Back, ${currentCustomer.name}!`
+        navBarHeading.innerText = `Welcome Back, ${currentCustomer.name}!`;
         loadMyDashboard();
       })
       .catch(error => {
@@ -153,62 +152,54 @@ function populateAppData() {
       })
 }
 
+
 //////////////////////
 //// 🗺 Nav Bar //////
 //////////////////////
 
-function loadMyDashboard() {
-  hide(aboutPage);
-  hide(bookingPage);
-  unHide(myBookingsPage);
+function loadSpecificPage(loadPage, hidePage1, hidePage2) {
+  hide(hidePage1);
+  hide(hidePage2);
+  unHide(loadPage)
+}
 
+function clickSpecificButton(clickButton, unClickButton1, unClickButton2) {
+  clickNavButton(clickButton);
+  unClickNavButton(unClickButton1);
+  unClickNavButton(unClickButton2);
+}
+
+function loadSpecificBackground(addedClass, removedClass1, removedClass2) {
+  pageBody.classList.add(addedClass);
+  pageBody.classList.remove(removedClass1);
+  pageBody.classList.remove(removedClass2);
+}
+
+function loadMyDashboard() {
   resetSearchResults();
   dateInput.value = '';
-
-  clickNavButton(navButtonViewBookings);
-  unClickNavButton(navButtonAbout);
-  unClickNavButton(navButtonBookRoom);
-
-  pageBody.classList.add('my-bookings-background');
-  pageBody.classList.remove('about-background');
-  pageBody.classList.remove('booking-background');
-
-  populateDashboard()
+  loadSpecificPage(myBookingsPage, aboutPage, bookingPage);
+  clickSpecificButton(navButtonViewBookings, navButtonAbout, navButtonBookRoom);
+  loadSpecificBackground('my-bookings-background', 'about-background', 'booking-background');
+  populateDashboard();
 }
 
 function loadBookingPage() {
-  hide(aboutPage);
-  hide(myBookingsPage);
-  unHide(bookingPage);
-
   resetSearchResults();
   dateInput.value = '';
-
-  clickNavButton(navButtonBookRoom);
-  unClickNavButton(navButtonAbout);
-  unClickNavButton(navButtonViewBookings);
-
-  pageBody.classList.remove('my-bookings-background');
-  pageBody.classList.remove('about-background');
-  pageBody.classList.add('booking-background');
+  loadSpecificPage(bookingPage, aboutPage, myBookingsPage)
+  clickSpecificButton(navButtonBookRoom, navButtonAbout, navButtonViewBookings);
+  loadSpecificBackground('booking-background', 'my-bookings-background', 'about-background');
 }
 
 function loadAboutPage() {
-  hide(bookingPage);
-  hide(myBookingsPage);
-  unHide(aboutPage);
-
   resetSearchResults();
   dateInput.value = '';
-
-  clickNavButton(navButtonAbout);
-  unClickNavButton(navButtonBookRoom);
-  unClickNavButton(navButtonViewBookings);
-
-  pageBody.classList.remove('my-bookings-background');
-  pageBody.classList.add('about-background');
-  pageBody.classList.remove('booking-background');
+  loadSpecificPage(aboutPage, bookingPage, myBookingsPage);
+  clickSpecificButton(navButtonAbout, navButtonBookRoom, navButtonViewBookings);
+  loadSpecificBackground('about-background', 'my-bookings-background', 'booking-background');
 }
+
 
 /////////////////////////////
 //// 🤡 Dashboard Page //////
@@ -216,8 +207,8 @@ function loadAboutPage() {
 
 function populateDashboard() {
   populateMoneySpent();
-  populateMyUpcomingBookings();
-  populateMyPastBookings();
+  populateBookings(myUpcomingBookingTitle, myUpcomingBookingDisplay, "futureBookings", "Upcoming Bookings", "future-booking-record-display");
+  populateBookings(myPastBookingTitle, myPastBookingDisplay, "pastBookings", "Past Bookings", "past-booking-record-display");
 }
 
 function populateMoneySpent() {
@@ -225,15 +216,14 @@ function populateMoneySpent() {
   myBookingSpendText.innerText = `You have spent $${moneySpent} with us so far!`;
 }
 
-function populateMyUpcomingBookings() {
-  myUpcomingBookingTitle.innerText = `Upcoming Bookings: ${currentCustomer.bookings.sortBookingsByToday().futureBookings.length}`;
+function populateBookings (titleElement, displayElement, timeKey, title, className) {
+  titleElement.innerText = `${title}: ${currentCustomer.bookings.sortBookingsByToday()[timeKey].length}`;
+  displayElement.innerHTML = '';
 
-  myUpcomingBookingDisplay.innerHTML = '';
-
-  currentCustomer.bookings.sortBookingsByToday().futureBookings.forEach(booking => {
-    myUpcomingBookingDisplay.innerHTML += `
-      <section class="future-booking-record-display">
-        <h6 class="booking-record-title-text">Your Upcoming Trip on ${booking.date}</h6>
+  currentCustomer.bookings.sortBookingsByToday()[timeKey].forEach(booking => {
+    displayElement.innerHTML += `
+      <section class=${className}>
+        <h6 class="booking-record-title-text">Your Trip on ${booking.date}</h6>
         <ul>
           <li class="booking-record-list-item">room number ${booking.findRoom(allRooms.list).number}</li>
           <li class="booking-record-list-item">${booking.findRoom(allRooms.list).roomType}</li>
@@ -245,25 +235,6 @@ function populateMyUpcomingBookings() {
   });
 }
 
-function populateMyPastBookings() {
-  myPastBookingTitle.innerText = `Past Bookings: ${currentCustomer.bookings.sortBookingsByToday().pastBookings.length}`;
-
-  myPastBookingDisplay.innerHTML = '';
-
-  currentCustomer.bookings.sortBookingsByToday().pastBookings.forEach(booking => {
-    myPastBookingDisplay.innerHTML += `
-      <section class="past-booking-record-display">
-        <h6 class="booking-record-title-text">Your Trip on ${booking.date}</h6>
-        <ul>
-          <li class="booking-record-list-item">room number ${booking.findRoom(allRooms.list).number}</li>
-          <li class="booking-record-list-item">${booking.findRoom(allRooms.list).roomType}</li>
-          <li class="booking-record-list-item">${booking.findRoom(allRooms.list).numBeds} ${booking.findRoom(allRooms.list).bedSize} bed(s)</li>
-          <li class="booking-record-list-item">spent ${booking.findRoom(allRooms.list).costPerNight}</li>
-        </ul>
-      </section>
-    `;
-  })
-}
 
 ///////////////////////////
 //// 📖 Booking Page //////
@@ -280,15 +251,11 @@ function checkInputFuture(inputValue) {
   const thisMonth = todaysDate.getMonth() + 1;
   const thisDay = todaysDate.getDate();
 
-  if (inputNums[0] < thisYear) {
-    return false;
-  } else if (inputNums[0] > thisYear) {
-    return true;
-  } else if (inputNums[1] < thisMonth) {
-    return false;
-  } else if (inputNums[1] > thisMonth) {
-    return true;
-  } else if (inputNums[2] < thisDay) {
+  if (
+    (inputNums[0] < thisYear) ||
+    (inputNums[0] === thisYear && inputNums[1] < thisMonth) ||
+    (inputNums[0] === thisYear && inputNums[1] === thisMonth && inputNums[2] < thisDay)
+  ) {
     return false;
   } else {
     return true;
@@ -332,14 +299,12 @@ function makeFilterTypes(searchResults) {
   filterDropDown.innerHTML = `
     <option disabled selected value>select a room type to filter</option>
   `;
-
   const listOfTypes = [];
   searchResults.forEach(room => {
     if (!listOfTypes.includes(room.roomType)) {
       listOfTypes.push(room.roomType)
     }
   });
-
   listOfTypes.forEach(type => {
     filterDropDown.innerHTML += `
     <option value="${type}">${type}</option>
@@ -364,21 +329,7 @@ function resetSearchResults() {
 function populateSearchResultsArea(roomList) {
   roomList.forEach(room => {
     const roomTypeDisplay = room.roomType.toUpperCase();
-    if (room.bidet) {
-      availableRoomsDisplayArea.innerHTML += `
-      <section class="available-room" id="${room.number}">
-        <h5 class="room-title">${roomTypeDisplay}</h5>
-        <ul class="room-list">
-          <li class="room-feature">Room #${room.number}</li>
-          <li class="room-feature">${room.numBeds} ${room.bedSize} bed(s)</li>
-          <li class="room-feature">Has a bidet</li>
-          <li class="room-feature">$${room.costPerNight} per night</li>
-        </ul>
-        <button class="room-select-button" type="button">Select This Room</button>
-      </section>
-      `;
-    } else {
-      availableRoomsDisplayArea.innerHTML += `
+    availableRoomsDisplayArea.innerHTML += `
       <section class="available-room" id="${room.number}">
         <h5 class="room-title">${roomTypeDisplay}</h5>
         <ul class="room-list">
@@ -388,18 +339,15 @@ function populateSearchResultsArea(roomList) {
         </ul>
         <button class="room-select-button" type="button">Select This Room</button>
       </section>
-      `;
-    }
+    `;
   });
 }
 
 function displaySearchResults() {
   resetSearchResults();
   checkInputValid(dateInput.value);
-
   if (checkInputValid(dateInput.value)) {
-    searchResults = new RoomRepo(allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings))
-    
+    searchResults = new RoomRepo(allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings));
     makeFilterTypes(searchResults.list);
     makeVisible(filterArea);
     populateSearchResultsArea(searchResults.list);
@@ -409,9 +357,7 @@ function displaySearchResults() {
 function displayFilteredResults() {
   availableRoomsDisplayArea.innerHTML = '';
   makeVisible(clearFilterButton);
-  
   filteredSearchResults = searchResults.filterByType(filterDropDown.value);
-
   populateSearchResultsArea(filteredSearchResults);
 }
 
@@ -440,18 +386,10 @@ function bookRoom() {
 }
 
 function postNewBooking() {
-  fetch('http://localhost:3001/api/v1/bookings', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(currentCustomer.makeBookingData(selectedRoom.number, requestedDate))
-  }).then(response => {
-    
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error('Response not OK - look at issue in body');
-    }
-  })
+  sendBookingData(
+    'http://localhost:3001/api/v1/bookings',
+    currentCustomer.makeBookingData(selectedRoom.number, requestedDate)
+    )
     .then(data => {
     unHide(bookingSuccessText);
     setTimeout(hideSuccessText, 4000);
