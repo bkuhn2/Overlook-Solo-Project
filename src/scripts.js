@@ -1,6 +1,6 @@
 // IMPORTS ----------------------------------------------------------------->
 import './css/styles.css';
-import retrieveData from './apiCalls';
+import {retrieveData, sendBookingData} from './apiCalls';
 import Customer from './classes/Customer';
 import Booking from './classes/Booking';
 import BookingRepo from './classes/BookingRepo';
@@ -103,7 +103,7 @@ bookButton.addEventListener('click', bookRoom)
 function checkLogInCreds(){
   if (acceptedUserNames.includes(userNameInput.value) &&
       passwordInput.value === temporaryPassword) {
-        return true;
+    return true;
   } else if (!acceptedUserNames.includes(userNameInput.value)) {
     loginErrorText.innerText = 'Username not found. Check for spelling and capitalization and try again.';
     setTimeout(resetLogInErrorText, 5000);
@@ -116,7 +116,7 @@ function checkLogInCreds(){
 }
 
 function getUserID() {
-  return userNameInput.value.split('customer')[1]
+  return userNameInput.value.split('customer')[1];
 }
 
 function loadApp() {
@@ -138,7 +138,7 @@ function populateAppData() {
         currentCustomer = new Customer(data[0], data[2].bookings);
         allBookings = new BookingRepo(data[2].bookings);
         allRooms = new RoomRepo(data[1].rooms);
-        navBarHeading.innerText = `Welcome Back, ${currentCustomer.name}!`
+        navBarHeading.innerText = `Welcome Back, ${currentCustomer.name}!`;
         loadMyDashboard();
       })
       .catch(error => {
@@ -332,14 +332,12 @@ function makeFilterTypes(searchResults) {
   filterDropDown.innerHTML = `
     <option disabled selected value>select a room type to filter</option>
   `;
-
   const listOfTypes = [];
   searchResults.forEach(room => {
     if (!listOfTypes.includes(room.roomType)) {
       listOfTypes.push(room.roomType)
     }
   });
-
   listOfTypes.forEach(type => {
     filterDropDown.innerHTML += `
     <option value="${type}">${type}</option>
@@ -396,10 +394,8 @@ function populateSearchResultsArea(roomList) {
 function displaySearchResults() {
   resetSearchResults();
   checkInputValid(dateInput.value);
-
   if (checkInputValid(dateInput.value)) {
-    searchResults = new RoomRepo(allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings))
-    
+    searchResults = new RoomRepo(allRooms.filterByAvailable(requestedDate, allBookings.sortBookingsByToday().futureBookings));
     makeFilterTypes(searchResults.list);
     makeVisible(filterArea);
     populateSearchResultsArea(searchResults.list);
@@ -409,9 +405,7 @@ function displaySearchResults() {
 function displayFilteredResults() {
   availableRoomsDisplayArea.innerHTML = '';
   makeVisible(clearFilterButton);
-  
   filteredSearchResults = searchResults.filterByType(filterDropDown.value);
-
   populateSearchResultsArea(filteredSearchResults);
 }
 
@@ -440,18 +434,10 @@ function bookRoom() {
 }
 
 function postNewBooking() {
-  fetch('http://localhost:3001/api/v1/bookings', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(currentCustomer.makeBookingData(selectedRoom.number, requestedDate))
-  }).then(response => {
-    
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error('Response not OK - look at issue in body');
-    }
-  })
+  sendBookingData(
+    'http://localhost:3001/api/v1/bookings',
+    currentCustomer.makeBookingData(selectedRoom.number, requestedDate)
+    )
     .then(data => {
     unHide(bookingSuccessText);
     setTimeout(hideSuccessText, 4000);
