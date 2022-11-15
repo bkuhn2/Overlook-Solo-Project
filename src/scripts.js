@@ -280,15 +280,11 @@ function checkInputFuture(inputValue) {
   const thisMonth = todaysDate.getMonth() + 1;
   const thisDay = todaysDate.getDate();
 
-  if (inputNums[0] < thisYear) {
-    return false;
-  } else if (inputNums[0] > thisYear) {
-    return true;
-  } else if (inputNums[1] < thisMonth) {
-    return false;
-  } else if (inputNums[1] > thisMonth) {
-    return true;
-  } else if (inputNums[2] < thisDay) {
+  if (
+    (inputNums[0] < thisYear) ||
+    (inputNums[0] === thisYear && inputNums[1] < thisMonth) ||
+    (inputNums[0] === thisYear && inputNums[1] === thisMonth && inputNums[2] < thisDay)
+  ) {
     return false;
   } else {
     return true;
