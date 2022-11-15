@@ -3,14 +3,11 @@ class RoomRepo {
     this.list = rooms;
   }
 
-  filterByType(type) { //takes in type selection in filter dropdown HTML
+  filterByType(type) {
     return this.list.filter(room => room.roomType === type)
   }
-  //returns an array
 
   filterByAvailable(dateRequest, futureBookings) { 
-    //make sure argument is formatted the way we want
-
       const dateRequestNums = dateRequest.split('/').map(num => +num)
       let dateRequestIsFuture = '';
 
@@ -19,15 +16,11 @@ class RoomRepo {
       const thisMonth = todaysDate.getMonth() + 1;
       const thisDay = todaysDate.getDate();
 
-      if (dateRequestNums[0] < thisYear) {
-        dateRequestIsFuture = false;
-      } else if (dateRequestNums[0] > thisYear) {
-        dateRequestIsFuture = true;
-      } else if (dateRequestNums[1] < thisMonth) {
-        dateRequestIsFuture = false;
-      } else if (dateRequestNums[1] > thisMonth) {
-        dateRequestIsFuture = true;
-      } else if (dateRequestNums[2] < thisDay) {
+      if (
+        (dateRequestNums[0] < thisYear) ||
+        (dateRequestNums[0] === thisYear && dateRequestNums[1] < thisMonth) ||
+        (dateRequestNums[0] === thisYear && dateRequestNums[1] === thisMonth && dateRequestNums[2] < thisDay)
+      ) {
         dateRequestIsFuture = false;
       } else {
         dateRequestIsFuture = true;
@@ -39,7 +32,6 @@ class RoomRepo {
       });
     
   }
-  //returns an array
 }
 
 export default RoomRepo;

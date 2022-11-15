@@ -24,7 +24,7 @@ describe('Room Repo', function() {
   });
 
   it('should filter its rooms by type', function() {
-    expect(roomRepo1.filterByType('')).to.be.a('array');
+    expect(roomRepo1.filterByType()).to.be.a('array');
     expect(roomRepo1.filterByType('presidential suite')).to.deep.equal([]);
     expect(roomRepo1.filterByType('residential suite')).to.deep.equal([
       {
@@ -67,6 +67,7 @@ describe('Room Repo', function() {
   it('should filter its rooms by which are available', function() {
     expect(roomRepo1.filterByAvailable("2023/02/22", bookingRepoTest.sortBookingsByToday().futureBookings))
       .to.deep.equal(roomRepo1.list);
+
     expect(roomRepo1.filterByAvailable("2023/11/17", bookingRepoTest.sortBookingsByToday().futureBookings))
       .to.deep.equal(november17FilteredRooms);
   }); 
