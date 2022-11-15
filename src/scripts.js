@@ -28,13 +28,6 @@ const temporaryPassword = 'overlook2021';
 //// 🌎 Body //////
 const pageBody = document.querySelector('#body');
 
-//// 🔑 Log-In Page //////
-const loginPage = document.querySelector('.login-page')
-const userNameInput = document.querySelector('#userNameInput');
-const passwordInput = document.querySelector('#passwordInput');
-const loginButton = document.querySelector('.login-button');
-const loginErrorText = document.querySelector('.login-error-text');
-
 //// 🗺 Nav Bar //////
 const navBar = document.querySelector('.nav-bar')
 const navBarHeading = document.querySelector('.nav-title-text');
@@ -76,10 +69,35 @@ const errorRetrievingDataPage = document.querySelector('.error-loading-page');
 
 
 
-// EVENT LISTENERS ---------------------------------------------------------->
+// INITIAL FETCH ON PAGE LOAD ----------------------------------------------->
+Promise.all([ 
+  retrieveData('http://localhost:3001/api/v1/customers'), 
+  retrieveData('http://localhost:3001/api/v1/rooms'), 
+  retrieveData('http://localhost:3001/api/v1/bookings')])
+    .then(data => {
 
-//// 🔑 Log-In Page //////
-loginButton.addEventListener('click', loadApp);
+    currentCustomer = new Customer(data[0].customers[49], data[2].bookings) // hardcoded - will be the login eventually
+    allBookings = new BookingRepo(data[2].bookings);
+    allRooms = new RoomRepo(data[1].rooms);
+
+    navBarHeading.innerText = `Welcome back, ${currentCustomer.name}!`
+
+    populateDashboard()
+  })
+    .catch(error => {
+      console.log(error);
+      hide(aboutPage);
+      hide(bookingPage);
+      hide(myBookingsPage);
+      hide(navBar);
+      pageBody.classList.add('error-page-background');
+      pageBody.classList.remove('my-bookings-background');
+      unHide(errorRetrievingDataPage);    
+    })
+
+
+
+// EVENT LISTENERS ---------------------------------------------------------->
 
 //// 🗺 Nav Bar //////
 navButtonViewBookings.addEventListener('click', loadMyDashboard);
@@ -90,68 +108,11 @@ navButtonAbout.addEventListener('click', loadAboutPage);
 checkAvailabilityButton.addEventListener('click', displaySearchResults);
 filterButton.addEventListener('click', displayFilteredResults);
 clearFilterButton.addEventListener('click', clearFilteredResults);
-availableRoomsDisplayArea.addEventListener('click', showBookingConfirmArea)
-bookButton.addEventListener('click', bookRoom)
+availableRoomsDisplayArea.addEventListener('click', showBookingConfirmArea);
+bookButton.addEventListener('click', bookRoom);
 
 
 // FUNCTIONS ---------------------------------------------------------------->
-
-//////////////////////
-/// 🗺 Login Page ////
-//////////////////////
-
-function checkLogInCreds(){
-  if (acceptedUserNames.includes(userNameInput.value) &&
-      passwordInput.value === temporaryPassword) {
-    return true;
-  } else if (!acceptedUserNames.includes(userNameInput.value)) {
-    loginErrorText.innerText = 'Username not found. Check for spelling and capitalization and try again.';
-    setTimeout(resetLogInErrorText, 5000);
-    return false;
-  } else if (passwordInput.value !== temporaryPassword) {
-    loginErrorText.innerText = 'Incorrect password. Check for spelling and capitalization and try again.';
-    setTimeout(resetLogInErrorText, 5000);
-    return false;
-  }
-}
-
-function getUserID() {
-  return userNameInput.value.split('customer')[1];
-}
-
-function loadApp() {
-  if (checkLogInCreds()) {
-    hide(loginPage);
-    pageBody.classList.remove('login-background');
-    unHide(navBar);
-    populateAppData();
-  }
-}
-
-function populateAppData() {
-  Promise.all([
-    retrieveData(`http://localhost:3001/api/v1/customers/${getUserID()}`), 
-    retrieveData('http://localhost:3001/api/v1/rooms'), 
-    retrieveData('http://localhost:3001/api/v1/bookings')])
-      .then(data => {
-        currentCustomer = new Customer(data[0], data[2].bookings);
-        allBookings = new BookingRepo(data[2].bookings);
-        allRooms = new RoomRepo(data[1].rooms);
-        navBarHeading.innerText = `Welcome Back, ${currentCustomer.name}!`;
-        loadMyDashboard();
-      })
-      .catch(error => {
-        console.log(error);
-        hide(aboutPage);
-        hide(bookingPage);
-        hide(myBookingsPage);
-        hide(navBar);
-        pageBody.classList.add('error-page-background');
-        pageBody.classList.remove('login-background');
-        unHide(errorRetrievingDataPage);
-      })
-}
-
 
 //////////////////////
 //// 🗺 Nav Bar //////
